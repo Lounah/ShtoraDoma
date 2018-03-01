@@ -1,6 +1,5 @@
 package com.lounah.silkapp.ui.dialogs;
 
-import android.app.Fragment;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
@@ -10,11 +9,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.lounah.silkapp.R;
+import com.lounah.silkapp.data.model.Dialog;
+import com.lounah.silkapp.data.model.Response;
 import com.lounah.silkapp.ui.BaseFragment;
+
+
+import java.util.List;
+
+import javax.inject.Inject;
 
 public class DialogsFragment extends BaseFragment {
 
-    private DialogsViewModel viewModel;
+    @Inject
+    DialogsViewModelFactory factory;
 
     @Override
     public void onAttach(Context context) {
@@ -24,19 +32,19 @@ public class DialogsFragment extends BaseFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewModel = ViewModelProviders.of(this).get(DialogsViewModel.class);
+        DialogsViewModel viewModel = ViewModelProviders.of(this, factory).get(DialogsViewModel.class);
         viewModel.getDialogs().observe(this, response -> {
             switch (response.getStatus()) {
                 case ERROR:
-
+                    processErrorState(response.getError());
                 break;
 
                 case LOADING:
-
+                    processLoadingState();
                 break;
 
                 case SUCCESS:
-
+                    processSuccessState(response);
                 break;
             }
         });
@@ -46,7 +54,8 @@ public class DialogsFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        View view = inflater.inflate(R.layout.fragment_dialogs, container, false);
+        return view;
     }
 
 
@@ -54,4 +63,21 @@ public class DialogsFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
+
+    public static DialogsFragment newInstance() {
+        return new DialogsFragment();
+    }
+
+    private void processLoadingState() {
+
+    }
+
+    private void processErrorState(@Nullable final Throwable error) {
+
+    }
+
+    private void processSuccessState(@NonNull final Response<List<Dialog>> dialogs) {
+
+    }
+
 }

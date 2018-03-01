@@ -6,4 +6,10 @@
 
     <string name="action_settings">Settings</string>
 
+    <string name="information">О нас</string>
+    <string name="dialogs">Диалог</string>
+    <string name="products">Наши изделия</string>
+    <string name="settings">Настройки</string>
+    <string name="go_next">Продолжить</string>
+
 </resources>

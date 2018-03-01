@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import com.lounah.silkapp.R;
 import com.lounah.silkapp.ui.login.LoginActivity;
 
 import java.util.Random;
@@ -48,13 +49,11 @@ public class SplashActivity extends DaggerActivity {
     private void onStartLoginActivity() {
         Intent toLoginActivity = new Intent(this, LoginActivity.class);
         startActivity(toLoginActivity);
-        finish();
     }
 
     private void onStartMainActivity() {
         Intent toMainActivity = new Intent(this, MainActivity.class);
         startActivity(toMainActivity);
-        finish();
     }
 
 }

@@ -5,11 +5,10 @@ android {
     buildToolsVersion "26.0.2"
     defaultConfig {
         applicationId "com.lounah.silkapp"
-        minSdkVersion 19
+        minSdkVersion 18
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
-        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -42,12 +41,11 @@ dependencies {
 
 
     // Dagger 2
-    annotationProcessor "com.google.dagger:dagger-compiler:2.11"
-    provided 'org.glassfish:javax.annotation:10.0-b28'
-    implementation "com.google.dagger:dagger:2.11"
-    implementation "com.google.dagger:dagger-android:2.11"
-    implementation "com.google.dagger:dagger-android-support:2.11"
-    annotationProcessor "com.google.dagger:dagger-android-processor:2.11"
+    implementation 'com.google.dagger:dagger:2.11'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
+    implementation 'com.google.dagger:dagger-android:2.11'
+    implementation 'com.google.dagger:dagger-android-support:2.11' // if you use the support libraries
+    annotationProcessor 'com.google.dagger:dagger-android-processor:2.11'
 
 
     // RxJava2
@@ -59,9 +57,6 @@ dependencies {
     implementation 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.0.0'
     implementation 'com.jakewharton.rxbinding2:rxbinding-recyclerview-v7:2.0.0'
 
-    // Retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
 
     // Picasso
     implementation 'com.squareup.picasso:picasso:2.5.2'
@@ -83,14 +78,20 @@ dependencies {
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 
     // Room
-    implementation "android.arch.persistence.room:runtime:1.0.0"
-    annotationProcessor "android.arch.persistence.room:compiler:1.0.0"
-    implementation "android.arch.persistence.room:rxjava2:1.0.0-alpha5"
+    implementation 'android.arch.persistence.room:runtime:1.0.0'
+    annotationProcessor 'android.arch.persistence.room:compiler:1.0.0'
+    implementation 'android.arch.persistence.room:rxjava2:1.0.0'
+
+
 
     // LiveData
-    implementation "android.arch.lifecycle:extensions:1.0.0"
-    annotationProcessor "android.arch.lifecycle:compiler:1.0.0"
+    implementation 'android.arch.lifecycle:extensions:1.1.0'
     implementation 'android.arch.lifecycle:reactivestreams:1.1.0'
+
+
+    // Lifecycle
+    implementation 'android.arch.lifecycle:common-java8:1.1.0'
+
 
     provided 'javax.annotation:jsr250-api:1.0'
 

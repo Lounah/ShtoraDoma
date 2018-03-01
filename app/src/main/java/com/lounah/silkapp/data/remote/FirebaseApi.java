@@ -3,6 +3,7 @@ package com.lounah.silkapp.data.remote;
 
 import com.lounah.silkapp.data.model.Dialog;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -18,6 +19,6 @@ public class FirebaseApi implements Api {
 
     @Override
     public Single<List<Dialog>> getDialogsByUserID(String... args) {
-        return null;
+        return Single.just(Arrays.asList(new Dialog("1","1","1","1")));
     }
 }

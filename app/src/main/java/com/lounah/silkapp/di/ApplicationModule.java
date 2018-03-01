@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -40,4 +41,5 @@ import dagger.Provides;
 
     @Binds
     abstract Context bindContext(Application application);
+
 }

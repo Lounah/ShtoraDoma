@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "558096727991",
+    "firebase_url": "https://domashtora.firebaseio.com",
+    "project_id": "domashtora",
+    "storage_bucket": "domashtora.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:558096727991:android:b6185dfc091b851f",
+        "android_client_info": {
+          "package_name": "com.lounah.silkapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "558096727991-i982ms03pb4hifd220qkl29ggrqcd03o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAofoTQaL2eJxsAt6S_Ajg_4d99zoSppzs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

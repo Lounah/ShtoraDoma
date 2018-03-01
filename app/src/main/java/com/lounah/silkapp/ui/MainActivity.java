@@ -1,8 +1,12 @@
 package com.lounah.silkapp.ui;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,90 +18,207 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.lounah.silkapp.R;
+import com.lounah.silkapp.ui.dialogs.DialogsFragment;
+import com.lounah.silkapp.ui.information.InformationFragment;
+import com.lounah.silkapp.ui.products.ProductsFragment;
+import com.lounah.silkapp.ui.settings.SettingsFragment;
+import com.ncapdevi.fragnav.FragNavController;
+import com.ncapdevi.fragnav.FragNavTransactionOptions;
+import com.ncapdevi.fragnav.tabhistory.FragNavTabHistoryController;
+import com.roughike.bottombar.OnTabReselectListener;
+import com.roughike.bottombar.OnTabSelectListener;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+import java.util.Arrays;
+import java.util.List;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import dagger.android.support.DaggerAppCompatActivity;
+
+public class MainActivity extends DaggerAppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener, BaseFragment.Navigation,
+        FragNavController.TransactionListener, FragNavController.RootFragmentListener {
+
+    private static final int INFORMATION_FRAGMENT_ID = 0;
+    private static final int DIALOGS_FRAGMENT_ID = 1;
+    private static final int PRODUCTS_FRAGMENT_ID = 2;
+    private static final int SETTINGS_FRAGMENT_ID = 3;
+
+    private static final int FRAGMENT_CONTAINER_ID = R.id.fragment_container;
+
+    private FragNavController fragNavController;
+
+    private static final List<Fragment> fragments = Arrays.asList(InformationFragment.newInstance(),
+            DialogsFragment.newInstance(), ProductsFragment.newInstance(), SettingsFragment.newInstance());
+
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawer;
+
+    @BindView(R.id.nav_view)
+    NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        ButterKnife.bind(this);
+        initUI(savedInstanceState, getSupportFragmentManager());
+    }
+
+
+
+    private void initUI(@Nullable final Bundle savedInstanceState, @NonNull final FragmentManager supportFragmentManager) {
+
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        initFragmentNavigationController(savedInstanceState, supportFragmentManager);
+
+        if (savedInstanceState == null)
+            setupDefaultFragment();
+    }
+
+    private void initFragmentNavigationController(@Nullable final Bundle savedInstanceState, @NonNull final FragmentManager supportFragmentManager) {
+        fragNavController = FragNavController.newBuilder(savedInstanceState, supportFragmentManager, FRAGMENT_CONTAINER_ID)
+                .rootFragments(fragments)
+                .defaultTransactionOptions(FragNavTransactionOptions.newBuilder()
+                                            .customAnimations(android.R.anim.fade_in, android.R.anim.fade_out).build())
+                .build();
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            if (!fragNavController.isRootFragment()) {
+                fragNavController.popFragment();
+            } else super.onBackPressed();
         }
     }
 
     @Override
+    public void onSaveInstanceState(@NonNull final Bundle outState) {
+        super.onSaveInstanceState(outState);
+        fragNavController.onSaveInstanceState(outState);
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id) {
+            case R.id.action_settings:
+                break;
+
+            case android.R.id.home:
+                fragNavController.popFragment();
+                break;
         }
 
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
+        final int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        switch (id) {
+            case R.id.nav_information:
+                fragNavController.switchTab(INFORMATION_FRAGMENT_ID);
+                break;
 
-        } else if (id == R.id.nav_slideshow) {
+            case R.id.nav_dialogs:
+                fragNavController.switchTab(DIALOGS_FRAGMENT_ID);
+                break;
 
-        } else if (id == R.id.nav_manage) {
+            case R.id.nav_products:
+                fragNavController.switchTab(PRODUCTS_FRAGMENT_ID);
+                break;
 
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+            case R.id.nav_settings:
+                fragNavController.switchTab(SETTINGS_FRAGMENT_ID);
+                break;
         }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    @Override
+    public void pushFragment(@NonNull Fragment fragment, @NonNull final boolean animationsAllowed) {
+        if (fragNavController != null) {
+            if (animationsAllowed) {
+                fragNavController.pushFragment(fragment, FragNavTransactionOptions.newBuilder()
+                        .customAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+                        .build());
+            } else {
+                fragNavController.pushFragment(fragment, FragNavTransactionOptions.newBuilder()
+                        .build());
+            }
+        }
+    }
+
+    private void setupDefaultFragment() {
+        pushFragment(new InformationFragment(), false);
+    }
+
+    public void onUpdateToolbar(@NonNull final Toolbar toolbar) {
+        setSupportActionBar(toolbar);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+    }
+
+    @Override
+    public Fragment getRootFragment(int i) {
+        Fragment root = null;
+        switch (i) {
+            case INFORMATION_FRAGMENT_ID:
+                root =  new InformationFragment();
+                break;
+            case DIALOGS_FRAGMENT_ID:
+                root =  new DialogsFragment();
+                break;
+            case PRODUCTS_FRAGMENT_ID:
+                root =  new ProductsFragment();
+                break;
+            case SETTINGS_FRAGMENT_ID:
+                root =  new SettingsFragment();
+                break;
+        }
+        return root;
+    }
+
+    @Override
+    public void onTabTransaction(@Nullable Fragment fragment, int i) {
+        if (getSupportActionBar() != null && fragNavController != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(!fragNavController.isRootFragment());
+        }
+    }
+
+    @Override
+    public void onFragmentTransaction(Fragment fragment, FragNavController.TransactionType transactionType) {
+        if (getSupportActionBar() != null && fragNavController != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(!fragNavController.isRootFragment());
+        }
+    }
+
 }
+
+

@@ -19,4 +19,10 @@ public class DialogsModule {
         return new DialogsRepository(api, dao);
     }
 
+    @Provides
+    @FragmentScoped
+    DialogsViewModelFactory provideDialogsViewModelFactory(@NonNull final DialogsRepository repository) {
+        return new DialogsViewModelFactory(repository);
+    }
+
 }

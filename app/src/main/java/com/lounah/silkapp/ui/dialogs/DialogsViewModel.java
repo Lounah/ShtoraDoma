@@ -1,7 +1,6 @@
 package com.lounah.silkapp.ui.dialogs;
 
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.LiveDataReactiveStreams;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.support.annotation.NonNull;
@@ -41,6 +40,7 @@ public class DialogsViewModel extends ViewModel {
     public DialogsViewModel(DialogsRepository repository) {
         this.repository = repository;
     }
+
 
     private Flowable<List<Dialog>> loadDialogs(@NonNull final String... args) {
         return repository.getAll(args[0])
