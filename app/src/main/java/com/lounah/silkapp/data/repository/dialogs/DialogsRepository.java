@@ -52,7 +52,7 @@ public class DialogsRepository implements BaseRepository<Dialog> {
 
     @Override
     public Observable<List<Dialog>> getAll(String... args) {
-        return getFromRemote(args[0]);
+        return Observable.concat(getFromLocal(args[0]).toObservable(), getFromRemote(args[0]));
     }
 
     private Single<List<Dialog>> getFromLocal(String... args) {
