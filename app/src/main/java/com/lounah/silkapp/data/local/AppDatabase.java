@@ -13,7 +13,7 @@ import com.lounah.silkapp.data.model.Dialog;
 import com.lounah.silkapp.data.model.Message;
 import com.lounah.silkapp.data.model.Product;
 
-@Database(entities = {Dialog.class, Message.class, Product.class, Comment.class}, version = 2, exportSchema = false)
+@Database(entities = {Dialog.class, Message.class, Product.class, Comment.class}, version = 3, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract DialogsDao dialogsDao();

@@ -35,7 +35,7 @@ public class SplashActivity extends DaggerActivity {
     }
 
     private void checkIfFirstLaunch() {
-        Log.i("uid", userId);
+        Log.i("uid", userId + " ");
         if (userId == null) {
             onStartLoginActivity();
         } else onStartMainActivity();

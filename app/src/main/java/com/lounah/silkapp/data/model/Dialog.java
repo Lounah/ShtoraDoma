@@ -28,6 +28,15 @@ public class Dialog {
     @ColumnInfo(name = "last_message_author")
     private String last_message_author;
 
+    @ColumnInfo(name = "author_status")
+    private String author_status;
+
+    @ColumnInfo(name = "last_message_status")
+    private String last_message_status;
+
+    @ColumnInfo(name = "participant_avatar_url")
+    private String participant_avatar_url;
+
     @TypeConverters(TimeStampConverter.class)
     @ColumnInfo(name = "date")
     private Date date;
@@ -35,10 +44,14 @@ public class Dialog {
     @Ignore
     public Dialog() {}
 
-    public Dialog(String participant_id, String last_message, String last_message_author, Date date) {
+    public Dialog(String participant_id, String last_message, String last_message_author,
+                  Date date, String author_status, String last_message_status, String participant_avatar_url) {
         this.participant_id = participant_id;
         this.last_message = last_message;
         this.last_message_author = last_message_author;
+        this.author_status = author_status;
+        this.last_message_status = last_message_status;
+        this.participant_avatar_url = participant_avatar_url;
         this.date = date;
     }
 
@@ -73,5 +86,36 @@ public class Dialog {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getAuthor_status() {
+        return author_status;
+    }
+
+    public void setAuthor_status(String author_status) {
+        this.author_status = author_status;
+    }
+
+    public String getLast_message_status() {
+        return last_message_status;
+    }
+
+    public void setLast_message_status(String last_message_status) {
+        this.last_message_status = last_message_status;
+    }
+
+    public String getParticipant_avatar_url() {
+        return participant_avatar_url;
+    }
+
+    public void setParticipant_avatar_url(String participant_avatar_url) {
+        this.participant_avatar_url = participant_avatar_url;
+    }
+
+    @Override
+    public String toString() {
+        return participant_id + " " + last_message + " " + last_message_author + " "
+                + last_message_status + " " + participant_avatar_url + " " + date +
+                " " + author_status;
     }
 }

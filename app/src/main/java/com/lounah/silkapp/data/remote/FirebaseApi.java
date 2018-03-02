@@ -34,8 +34,6 @@ public class FirebaseApi implements Api {
     public Observable<List<Dialog>> getDialogsByUserID(String... args) {
         return Observable.create(source -> {
 
-
-
             Query query = db.collection(COLLECTION_DIALOGS)
                     .whereEqualTo(PARTICIPANT_ID, args[0]);
 

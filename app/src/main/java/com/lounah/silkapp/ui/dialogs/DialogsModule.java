@@ -1,5 +1,6 @@
 package com.lounah.silkapp.ui.dialogs;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -27,6 +28,12 @@ public class DialogsModule {
     DialogsViewModelFactory provideDialogsViewModelFactory(@NonNull final DialogsRepository repository,
                                                            @Nullable final @Named("uid") String uid) {
         return new DialogsViewModelFactory(repository, uid);
+    }
+
+    @Provides
+    @FragmentScoped
+    DialogsRvAdapter provideAdapter(@NonNull final Context context) {
+        return new DialogsRvAdapter(context);
     }
 
 }

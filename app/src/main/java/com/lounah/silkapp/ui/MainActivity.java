@@ -1,5 +1,7 @@
 package com.lounah.silkapp.ui;
 
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -7,6 +9,9 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.view.ActionProvider;
+import android.view.ContextMenu;
+import android.view.SubMenu;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -36,7 +41,7 @@ import dagger.android.support.DaggerAppCompatActivity;
 
 public class MainActivity extends DaggerAppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, BaseFragment.Navigation,
-        FragNavController.TransactionListener, FragNavController.RootFragmentListener {
+        FragNavController.RootFragmentListener {
 
     private static final int INFORMATION_FRAGMENT_ID = 0;
     private static final int DIALOGS_FRAGMENT_ID = 1;
@@ -47,17 +52,16 @@ public class MainActivity extends DaggerAppCompatActivity
 
     private FragNavController fragNavController;
 
-    private static final List<Fragment> fragments = Arrays.asList(InformationFragment.newInstance(),
-            DialogsFragment.newInstance(), ProductsFragment.newInstance(), SettingsFragment.newInstance());
-
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+//    @BindView(R.id.toolbar)
+//    Toolbar toolbar;
 
     @BindView(R.id.drawer_layout)
     DrawerLayout drawer;
 
     @BindView(R.id.nav_view)
     NavigationView navigationView;
+
+    private ActionBarDrawerToggle toggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,25 +75,38 @@ public class MainActivity extends DaggerAppCompatActivity
 
     private void initUI(@Nullable final Bundle savedInstanceState, @NonNull final FragmentManager supportFragmentManager) {
 
-        setSupportActionBar(toolbar);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+//        setSupportActionBar(toolbar);
+//
+//        toggle = new ActionBarDrawerToggle(
+//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        drawer.addDrawerListener(toggle);
+//        toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
 
         initFragmentNavigationController(savedInstanceState, supportFragmentManager);
 
-        if (savedInstanceState == null)
-            setupDefaultFragment();
     }
 
     private void initFragmentNavigationController(@Nullable final Bundle savedInstanceState, @NonNull final FragmentManager supportFragmentManager) {
         fragNavController = FragNavController.newBuilder(savedInstanceState, supportFragmentManager, FRAGMENT_CONTAINER_ID)
-                .rootFragments(fragments)
-                .defaultTransactionOptions(FragNavTransactionOptions.newBuilder()
-                                            .customAnimations(android.R.anim.fade_in, android.R.anim.fade_out).build())
+                .transactionListener(new FragNavController.TransactionListener() {
+                    @Override
+                    public void onTabTransaction(@Nullable Fragment fragment, int i) {
+                        if (getSupportActionBar() != null && fragNavController != null) {
+                            getSupportActionBar().setDisplayHomeAsUpEnabled(!fragNavController.isRootFragment());
+                        }
+                    }
+
+                    @Override
+                    public void onFragmentTransaction(Fragment fragment, FragNavController.TransactionType transactionType) {
+                        if (getSupportActionBar() != null && fragNavController != null) {
+                            getSupportActionBar().setDisplayHomeAsUpEnabled(!fragNavController.isRootFragment());
+                        }
+                    }
+                })
+                .rootFragmentListener(this, 4)
+                .selectedTabIndex(INFORMATION_FRAGMENT_ID)
                 .build();
     }
 
@@ -179,7 +196,7 @@ public class MainActivity extends DaggerAppCompatActivity
 
     public void onUpdateToolbar(@NonNull final Toolbar toolbar) {
         setSupportActionBar(toolbar);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
@@ -203,20 +220,6 @@ public class MainActivity extends DaggerAppCompatActivity
                 break;
         }
         return root;
-    }
-
-    @Override
-    public void onTabTransaction(@Nullable Fragment fragment, int i) {
-        if (getSupportActionBar() != null && fragNavController != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(!fragNavController.isRootFragment());
-        }
-    }
-
-    @Override
-    public void onFragmentTransaction(Fragment fragment, FragNavController.TransactionType transactionType) {
-        if (getSupportActionBar() != null && fragNavController != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(!fragNavController.isRootFragment());
-        }
     }
 
 }

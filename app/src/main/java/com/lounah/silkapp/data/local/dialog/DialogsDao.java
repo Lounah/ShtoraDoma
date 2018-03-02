@@ -20,4 +20,7 @@ public interface  DialogsDao extends BaseDao<Dialog> {
     @Query("SELECT * FROM dialogs WHERE participant_id=:userID")
     Single<List<Dialog>> getByUserID(String userID);
 
+    @Query("DELETE FROM dialogs")
+    void eraseAll();
+
 }
