@@ -13,7 +13,9 @@ import org.reactivestreams.Subscription;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
@@ -35,10 +37,12 @@ public class DialogsViewModel extends ViewModel {
 
     private Disposable dialogsDisposable;
 
+    private final String uid;
 
     @Inject
-    public DialogsViewModel(DialogsRepository repository) {
+    public DialogsViewModel(DialogsRepository repository, @NonNull final String uid) {
         this.repository = repository;
+        this.uid = uid;
     }
 
 
@@ -52,7 +56,7 @@ public class DialogsViewModel extends ViewModel {
     protected LiveData<Response<List<Dialog>>> getDialogs() {
         if (dialogs == null) {
             dialogs = new MutableLiveData<>();
-            dialogsDisposable = loadDialogs("1")
+            dialogsDisposable = loadDialogs(uid)
                     .subscribe(data -> dialogs.setValue(Response.success(data)),
                                 throwable -> dialogs.setValue(Response.error(throwable)));
         }

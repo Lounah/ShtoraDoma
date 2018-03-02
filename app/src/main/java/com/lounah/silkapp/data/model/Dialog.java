@@ -1,11 +1,17 @@
 package com.lounah.silkapp.data.model;
 
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverters;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.lounah.silkapp.data.converters.TimeStampConverter;
+
+import java.util.Date;
 import java.util.Objects;
 
 @Entity(tableName = "dialogs")
@@ -13,64 +19,59 @@ public class Dialog {
 
     @NonNull
     @PrimaryKey
-    private String id;
-    private String lastMessage;
-    private String lastMessageAuthor;
-    private String date;
+    @ColumnInfo(name = "participant_id")
+    private String participant_id;
 
-    public Dialog(String id, String lastMessage, String lastMessageAuthor, String date) {
-        this.id = id;
-        this.lastMessage = lastMessage;
-        this.lastMessageAuthor = lastMessageAuthor;
+    @ColumnInfo(name = "last_message")
+    private String last_message;
+
+    @ColumnInfo(name = "last_message_author")
+    private String last_message_author;
+
+    @TypeConverters(TimeStampConverter.class)
+    @ColumnInfo(name = "date")
+    private Date date;
+
+    @Ignore
+    public Dialog() {}
+
+    public Dialog(String participant_id, String last_message, String last_message_author, Date date) {
+        this.participant_id = participant_id;
+        this.last_message = last_message;
+        this.last_message_author = last_message_author;
         this.date = date;
     }
 
-    public String getId() {
-        return id;
+    @NonNull
+    public String getParticipant_id() {
+        return participant_id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setParticipant_id(@NonNull String participant_id) {
+        this.participant_id = participant_id;
     }
 
-    public String getLastMessage() {
-        return lastMessage;
+    public String getLast_message() {
+        return last_message;
     }
 
-    public void setLastMessage(String lastMessage) {
-        this.lastMessage = lastMessage;
+    public void setLast_message(String last_message) {
+        this.last_message = last_message;
     }
 
-    public String getLastMessageAuthor() {
-        return lastMessageAuthor;
+    public String getLast_message_author() {
+        return last_message_author;
     }
 
-    public void setLastMessageAuthor(String lastMessageAuthor) {
-        this.lastMessageAuthor = lastMessageAuthor;
+    public void setLast_message_author(String last_message_author) {
+        this.last_message_author = last_message_author;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Dialog dialog = (Dialog) o;
-        return Objects.equals(id, dialog.id) &&
-                Objects.equals(lastMessage, dialog.lastMessage) &&
-                Objects.equals(lastMessageAuthor, dialog.lastMessageAuthor) &&
-                Objects.equals(date, dialog.date);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, lastMessage, lastMessageAuthor, date);
-    }
-
 }

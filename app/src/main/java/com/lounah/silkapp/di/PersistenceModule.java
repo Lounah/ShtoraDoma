@@ -20,7 +20,7 @@ import dagger.Provides;
     @Singleton
     @Provides
     AppDatabase provideRoomDatabase(Application mApplication) {
-        return Room.databaseBuilder(mApplication, AppDatabase.class, "app-db").build();
+        return Room.databaseBuilder(mApplication, AppDatabase.class, "app-db").fallbackToDestructiveMigration().build();
     }
 
     @Singleton

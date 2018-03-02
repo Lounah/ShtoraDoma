@@ -16,7 +16,7 @@ import io.reactivex.Single;
 @Dao
 public interface  DialogsDao extends BaseDao<Dialog> {
 
-    @Query("SELECT * FROM dialogs WHERE id=:userID")
+    @Query("SELECT * FROM dialogs WHERE participant_id=:userID")
     Single<List<Dialog>> getByUserID(String userID);
 
 }

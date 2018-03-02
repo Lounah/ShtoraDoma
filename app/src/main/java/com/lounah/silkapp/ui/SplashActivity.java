@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.lounah.silkapp.R;
 import com.lounah.silkapp.ui.login.LoginActivity;
@@ -34,6 +35,7 @@ public class SplashActivity extends DaggerActivity {
     }
 
     private void checkIfFirstLaunch() {
+        Log.i("uid", userId);
         if (userId == null) {
             onStartLoginActivity();
         } else onStartMainActivity();

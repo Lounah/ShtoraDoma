@@ -1,11 +1,14 @@
 package com.lounah.silkapp.ui.dialogs;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.lounah.silkapp.data.local.dialog.DialogsDao;
 import com.lounah.silkapp.data.remote.Api;
 import com.lounah.silkapp.data.repository.dialogs.DialogsRepository;
 import com.lounah.silkapp.di.FragmentScoped;
+
+import javax.inject.Named;
 
 import dagger.Module;
 import dagger.Provides;
@@ -21,8 +24,9 @@ public class DialogsModule {
 
     @Provides
     @FragmentScoped
-    DialogsViewModelFactory provideDialogsViewModelFactory(@NonNull final DialogsRepository repository) {
-        return new DialogsViewModelFactory(repository);
+    DialogsViewModelFactory provideDialogsViewModelFactory(@NonNull final DialogsRepository repository,
+                                                           @Nullable final @Named("uid") String uid) {
+        return new DialogsViewModelFactory(repository, uid);
     }
 
 }

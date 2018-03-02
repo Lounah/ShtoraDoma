@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "558096727991-a6qlo1ggp31jiid4arphis9v6vq0clc9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lounah.silkapp",
+            "certificate_hash": "1903af2400e34fde5642aab43a4a4db1fa809d8e"
+          }
+        },
+        {
           "client_id": "558096727991-i982ms03pb4hifd220qkl29ggrqcd03o.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "558096727991-i982ms03pb4hifd220qkl29ggrqcd03o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
