@@ -15,6 +15,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
 import io.reactivex.Single;
 
 public class FirebaseApi implements Api {
@@ -30,8 +31,8 @@ public class FirebaseApi implements Api {
     }
 
     @Override
-    public Single<List<Dialog>> getDialogsByUserID(String... args) {
-        return Single.create(source -> {
+    public Observable<List<Dialog>> getDialogsByUserID(String... args) {
+        return Observable.create(source -> {
 
 
 
@@ -50,8 +51,7 @@ public class FirebaseApi implements Api {
                     for (DocumentSnapshot snapshot : documentSnapshots) {
                         dialogs.add(snapshot.toObject(Dialog.class));
                     }
-                    Log.i("DIALOGS FIREBASE RE", dialogs.get(0).getLast_message());
-                    source.onSuccess(dialogs);
+                    source.onNext(dialogs);
                 }
             });
         });

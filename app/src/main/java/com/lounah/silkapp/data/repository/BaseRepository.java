@@ -20,6 +20,6 @@ public interface BaseRepository<T> {
 
     Single<T> get(String... args);
 
-    Flowable<List<T>> getAll(String... args);
+    Observable<List<T>> getAll(String... args);
 
 }

@@ -51,8 +51,8 @@ public class DialogsRepository implements BaseRepository<Dialog> {
     }
 
     @Override
-    public Flowable<List<Dialog>> getAll(String... args) {
-        return Single.concat(getFromLocal(args[0]), getFromRemote(args[0]));
+    public Observable<List<Dialog>> getAll(String... args) {
+        return Observable.concat(getFromLocal(args[0]).toObservable(), getFromRemote(args[0]));
     }
 
     private Single<List<Dialog>> getFromLocal(String... args) {
@@ -60,9 +60,9 @@ public class DialogsRepository implements BaseRepository<Dialog> {
                 .subscribeOn(Schedulers.io());
     }
 
-    private Single<List<Dialog>> getFromRemote(String... args) {
+    private Observable<List<Dialog>> getFromRemote(String... args) {
         return api.getDialogsByUserID(args[0])
-                .doOnSuccess(this::storeInDB);
+                .doOnNext(this::storeInDB);
     }
 
     private void storeInDB(@NonNull final List<Dialog> dialogs) {

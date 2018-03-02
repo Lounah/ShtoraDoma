@@ -21,6 +21,7 @@ import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
 import io.reactivex.FlowableEmitter;
 import io.reactivex.FlowableOnSubscribe;
+import io.reactivex.Observable;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -46,7 +47,7 @@ public class DialogsViewModel extends ViewModel {
     }
 
 
-    private Flowable<List<Dialog>> loadDialogs(@NonNull final String... args) {
+    private Observable<List<Dialog>> loadDialogs(@NonNull final String... args) {
         return repository.getAll(args[0])
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
