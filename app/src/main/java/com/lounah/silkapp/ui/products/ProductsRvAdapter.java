@@ -44,7 +44,7 @@ public class ProductsRvAdapter extends RecyclerView.Adapter<ProductsRvAdapter.Vi
     public void onBindViewHolder(ProductsRvAdapter.ViewHolder holder, int position) {
         Product product = products.get(position);
 
-        Picasso.with(context).load(product.getImage_header_url()).into(holder.ivHeader);
+        Picasso.with(context).load(product.getImage_header_url()).placeholder(R.drawable.placeholder).into(holder.ivHeader);
 
         holder.comments.setText(String.valueOf(product.getComments_quantity()));
 

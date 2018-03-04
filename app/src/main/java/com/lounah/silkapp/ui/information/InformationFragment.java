@@ -2,9 +2,12 @@ package com.lounah.silkapp.ui.information;
 
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,11 +20,15 @@ import com.lounah.silkapp.ui.dialogs.DialogsFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class InformationFragment extends BaseFragment {
 
     @BindView(R.id.information_toolbar)
     Toolbar toolbar;
+
+    @BindView(R.id.fab_call)
+    FloatingActionButton fab;
 
     @Override
     public void onAttach(Context context) {
@@ -50,8 +57,13 @@ public class InformationFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
-    public static InformationFragment newInstance() {
-        return new InformationFragment();
+
+    @OnClick(R.id.fab_call)
+    public void onFabCallClicked() {
+        final String phone = getResources().getString(R.string.default_phone_number_1);
+        Intent call = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
+        call.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(call);
     }
 
 }
