@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.lounah.silkapp.R;
+import com.lounah.silkapp.data.model.User;
 import com.lounah.silkapp.ui.MainActivity;
 import com.lounah.silkapp.util.UserIdGenerator;
 import com.lounah.silkapp.util.UsernameInputReviewer;
@@ -27,7 +28,7 @@ import dagger.android.support.DaggerAppCompatActivity;
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 
-public class LoginActivity extends DaggerAppCompatActivity {
+public class LoginActivity extends DaggerAppCompatActivity implements LoginView {
 
     @BindView(R.id.btn_continue)
     Button btnContinue;
@@ -41,6 +42,9 @@ public class LoginActivity extends DaggerAppCompatActivity {
     @Inject
     SharedPreferences sharedPreferences;
 
+    @Inject
+    LoginPresenter presenter;
+
 
     private Disposable inputObserver;
 
@@ -49,14 +53,16 @@ public class LoginActivity extends DaggerAppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        presenter.setView(this);
         onListenUserInput();
     }
 
     @OnClick(R.id.btn_continue)
     public void onContinueButtonClicked() {
-        final String uid = String.valueOf(UserIdGenerator.generate());
-        sharedPreferences.edit().putString("uid", uid).apply();
-        sharedPreferences.edit().putString("username", etUsername.getText().toString()).apply();
+        final int uid = UserIdGenerator.generate();
+        saveUser(uid, etUsername.getText().toString());
+        final User user = new User();
+        presenter.saveUser(user);
         onStartMainActivity();
     }
 
@@ -67,9 +73,16 @@ public class LoginActivity extends DaggerAppCompatActivity {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        presenter.setView(this);
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         inputObserver.dispose();
+        presenter.dropView();
     }
 
     private void onListenUserInput() {
@@ -90,4 +103,23 @@ public class LoginActivity extends DaggerAppCompatActivity {
         }
     }
 
+    private void saveUser(final int uid, @NonNull final String username) {
+        sharedPreferences.edit().putInt("uid", uid).apply();
+        sharedPreferences.edit().putString("username", username).apply();
+    }
+
+    @Override
+    public void onShowLoadingView() {
+
+    }
+
+    @Override
+    public void onHideLoadingView() {
+
+    }
+
+    @Override
+    public void onShowError(@NonNull Throwable error) {
+
+    }
 }

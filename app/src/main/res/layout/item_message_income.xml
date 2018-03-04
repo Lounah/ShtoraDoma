@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_message_income"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="4dp"
+        android:autoLink="all"
+        android:background="@drawable/background_message_income"
+        android:linksClickable="true"
+        android:maxWidth="220dp"
+        android:padding="8dp"
+        android:text="hi man, how are you?hi man, how are you?hi man, how are you?hi man, how are you?hi man, how are you?hi man, how are you?"
+        android:textColor="#ffffff"
+        android:textColorLink="@color/linkColor" />
+
+
+    <TextView
+        android:id="@+id/tv_income_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/tv_message_income"
+        android:layout_alignBottom="@id/tv_message_income"
+        android:layout_marginStart="8dp"
+        android:paddingBottom="2dp"
+        android:textColor="@android:color/black"
+        android:text="23:51"
+        android:textSize="8sp" />
+
+</RelativeLayout>

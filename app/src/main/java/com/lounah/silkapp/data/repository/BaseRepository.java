@@ -18,8 +18,8 @@ public interface BaseRepository<T> {
 
     Completable addAll(List<T> data);
 
-    Single<T> get(String... args);
+    Single<T> get(int id);
 
-    Observable<List<T>> getAll(String... args);
+    Observable<List<T>> getAll(int... id);
 
 }

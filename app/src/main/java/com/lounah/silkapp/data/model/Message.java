@@ -6,6 +6,11 @@ import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.stfalcon.chatkit.commons.models.IMessage;
+import com.stfalcon.chatkit.commons.models.IUser;
+
+import java.util.Date;
+
 @Entity
 public class Message {
 
@@ -20,4 +25,5 @@ public class Message {
     public String getId() {
         return id;
     }
+
 }

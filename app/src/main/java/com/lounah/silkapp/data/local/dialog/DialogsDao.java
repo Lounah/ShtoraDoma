@@ -17,8 +17,8 @@ import io.reactivex.Single;
 @Dao
 public interface  DialogsDao extends BaseDao<Dialog> {
 
-    @Query("SELECT * FROM dialogs WHERE participant_id=:userID")
-    Single<List<Dialog>> getByUserID(String userID);
+    @Query("SELECT * FROM dialogs WHERE participant_id=:id")
+    Single<List<Dialog>> getByUserID(int id);
 
     @Query("DELETE FROM dialogs")
     void eraseAll();

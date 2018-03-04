@@ -7,24 +7,14 @@ import android.support.annotation.NonNull;
 
 import com.lounah.silkapp.data.model.Dialog;
 import com.lounah.silkapp.data.model.Response;
-import com.lounah.silkapp.data.repository.dialogs.DialogsRepository;
-
-import org.reactivestreams.Subscription;
+import com.lounah.silkapp.data.repository.DialogsRepository;
 
 import java.util.List;
 
-import javax.annotation.Nullable;
 import javax.inject.Inject;
-import javax.inject.Named;
 
-import io.reactivex.BackpressureStrategy;
-import io.reactivex.Flowable;
-import io.reactivex.FlowableEmitter;
-import io.reactivex.FlowableOnSubscribe;
 import io.reactivex.Observable;
-import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
@@ -38,17 +28,17 @@ public class DialogsViewModel extends ViewModel {
 
     private Disposable dialogsDisposable;
 
-    private final String uid;
+    private final int uid;
 
     @Inject
-    public DialogsViewModel(DialogsRepository repository, @NonNull final String uid) {
+    public DialogsViewModel(DialogsRepository repository, @NonNull final int uid) {
         this.repository = repository;
         this.uid = uid;
     }
 
 
-    private Observable<List<Dialog>> loadDialogs(@NonNull final String... args) {
-        return repository.getAll(args[0])
+    private Observable<List<Dialog>> loadDialogs(@NonNull final int uid) {
+        return repository.getAll(uid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(__ -> dialogs.setValue(Response.loading()));

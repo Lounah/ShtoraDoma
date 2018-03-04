@@ -35,8 +35,8 @@ import dagger.Provides;
     @Singleton
     @Provides
     @Named("uid")
-    static String provideUserID(SharedPreferences sharedPreferences) {
-        return sharedPreferences.getString(USER_ID_KEY, null);
+    static int provideUserID(SharedPreferences sharedPreferences) {
+        return sharedPreferences.getInt(USER_ID_KEY, 0);
     }
 
     @Binds

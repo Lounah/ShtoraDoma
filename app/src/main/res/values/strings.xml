@@ -12,4 +12,37 @@
     <string name="settings">Настройки</string>
     <string name="go_next">Продолжить</string>
 
+
+    <string name="default_phone_number_1">8 (918) 294-05-21</string>
+    <string name="default_phone_number_2">8 (918) 621-66-38</string>
+    <string name="default_type_of_phone">Мобильный</string>
+    <string name="default_mail_1">lounah@yandex.ru</string>
+    <string name="default_mail_type_1">Рабочий</string>
+    <string name="default_mail_2">moonvishnya@gmail.com</string>
+    <string name="default_mail_type_2">Личный</string>
+
+    <string name="default_hint_message">Введите сообщение...</string>
+    <string name="default_hint_comment">Оставьте комментарий...</string>
+
+    <string name="description">Через час отсюда в чистый переулок \n
+вытечет по человеку ваш обрюзгший жир, \n
+а я вам открыл столько стихов шкатулок, \n
+я - бесценных слов мот и транжир. \n
+
+Вот вы, мужчина, у вас в усах капуста \n
+Где-то недокушанных, недоеденных щей; \n
+вот вы, женщина, на вас белила густо, \n
+вы смотрите устрицей из раковин вещей. \n
+
+Все вы на бабочку поэтиного сердца \n
+взгромоздитесь, грязные, в калошах и без калош. \n
+Толпа озвереет, будет тереться, \n
+ощетинит ножки стоглавая вошь. \n
+
+А если сегодня мне, грубому гунну, \n
+кривляться перед вами не захочется - и вот \n
+я захохочу и радостно плюну, \n
+плюну в лицо вам \n
+я - бесценных слов транжир и мот. \n</string>
+
 </resources>

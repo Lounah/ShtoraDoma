@@ -5,17 +5,17 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.lounah.silkapp.data.repository.dialogs.DialogsRepository;
+import com.lounah.silkapp.data.repository.DialogsRepository;
 
 import javax.inject.Inject;
 
 public class DialogsViewModelFactory implements ViewModelProvider.Factory {
 
     private final DialogsRepository repository;
-    private final String uid;
+    private final int uid;
 
     @Inject
-    public DialogsViewModelFactory(@NonNull final DialogsRepository repository, @Nullable final String uid) {
+    public DialogsViewModelFactory(@NonNull final DialogsRepository repository, @Nullable final int uid) {
         this.repository = repository;
         this.uid = uid;
     }

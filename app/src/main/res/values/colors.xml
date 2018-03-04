@@ -4,4 +4,9 @@
     <color name="colorPrimaryDark">#616161</color>
     <color name="colorAccent">#424242</color>
     <color name="defaultIconColor">#757575</color>
+    <color name="defaultIncomingMessageColor">#9b9999</color>
+    <color name="defaultOutcomeMessageColor">#c6c5c5</color>
+    <color name="defaultIncomingPressedColor">#646262</color>
+    <color name="defaultOutcomePressedColor">#d6bcbc</color>
+    <color name="linkColor">#536dfe</color>
 </resources>

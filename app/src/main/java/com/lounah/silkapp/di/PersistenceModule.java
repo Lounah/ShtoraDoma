@@ -9,6 +9,7 @@ import com.lounah.silkapp.data.local.comment.CommentsDao;
 import com.lounah.silkapp.data.local.dialog.DialogsDao;
 import com.lounah.silkapp.data.local.message.MessagesDao;
 import com.lounah.silkapp.data.local.product.ProductsDao;
+import com.lounah.silkapp.data.local.users.UsersDao;
 
 import javax.inject.Singleton;
 
@@ -45,6 +46,12 @@ import dagger.Provides;
     @Provides
     ProductsDao provideProductsDao(AppDatabase appDatabase) {
         return appDatabase.productsDao();
+    }
+
+    @Singleton
+    @Provides
+    UsersDao provideUsersDao(AppDatabase appDatabase) {
+        return appDatabase.usersDao();
     }
 
 

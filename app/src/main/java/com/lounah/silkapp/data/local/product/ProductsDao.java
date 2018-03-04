@@ -7,4 +7,6 @@ import com.lounah.silkapp.data.model.Product;
 
 @Dao
 public interface ProductsDao extends BaseDao<Product> {
+
+
 }

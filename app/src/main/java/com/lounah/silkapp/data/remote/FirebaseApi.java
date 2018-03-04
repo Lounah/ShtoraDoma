@@ -1,12 +1,14 @@
 package com.lounah.silkapp.data.remote;
 
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.lounah.silkapp.data.model.Dialog;
+import com.lounah.silkapp.data.model.User;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,6 +17,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 
@@ -31,11 +34,11 @@ public class FirebaseApi implements Api {
     }
 
     @Override
-    public Observable<List<Dialog>> getDialogsByUserID(String... args) {
+    public Observable<List<Dialog>> getDialogsByUserID(int id) {
         return Observable.create(source -> {
 
             Query query = db.collection(COLLECTION_DIALOGS)
-                    .whereEqualTo(PARTICIPANT_ID, args[0]);
+                    .whereEqualTo(PARTICIPANT_ID, id);
 
             query.addSnapshotListener((documentSnapshots, e) -> {
 
@@ -52,6 +55,13 @@ public class FirebaseApi implements Api {
                     source.onNext(dialogs);
                 }
             });
+        });
+    }
+
+    @Override
+    public Completable saveUser(@NonNull User user) {
+        return Completable.create(source -> {
+
         });
     }
 }

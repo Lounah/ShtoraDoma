@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:clipToPadding="false">
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:id="@+id/iv_call"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/ic_phone_in_talk_black_36dp"
+        android:layout_margin="36dp"/>
+
+    <TextView
+        android:id="@+id/tv_phone_number_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginTop="36dp"
+        android:layout_toEndOf="@id/iv_call"
+        android:text="@string/default_phone_number_1"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tv_type_of_phone_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_phone_number_1"
+        android:layout_toEndOf="@id/iv_call"
+        android:layout_marginBottom="24dp"
+        android:text="@string/default_type_of_phone"/>
+
+
+    <TextView
+        android:id="@+id/tv_phone_number_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_type_of_phone_1"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="36dp"
+        android:layout_toEndOf="@id/iv_call"
+        android:text="@string/default_phone_number_2"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tv_type_of_phone_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_phone_number_2"
+        android:layout_toEndOf="@id/iv_call"
+        android:layout_marginBottom="36dp"
+        android:text="@string/default_type_of_phone"/>
+
+    <View
+        android:id="@+id/view_divider_1"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/tv_type_of_phone_2"
+        android:layout_toEndOf="@id/iv_call"
+        android:background="@android:color/darker_gray"/>
+
+    <ImageView
+        android:id="@+id/iv_mail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/view_divider_1"
+        android:layout_margin="36dp"
+        android:src="@drawable/ic_email_black_36dp"/>
+
+    <TextView
+        android:id="@+id/tv_mail_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginTop="36dp"
+        android:layout_below="@id/view_divider_1"
+        android:layout_toEndOf="@id/iv_mail"
+        android:text="@string/default_mail_1"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tv_type_of_mail_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_mail_1"
+        android:layout_toEndOf="@id/iv_mail"
+        android:layout_marginBottom="24dp"
+        android:text="@string/default_mail_type_1"/>
+
+
+    <TextView
+        android:id="@+id/tv_mail_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="36dp"
+        android:layout_below="@id/tv_type_of_mail_1"
+        android:layout_toEndOf="@id/iv_mail"
+        android:text="@string/default_mail_2"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tv_type_of_mail_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_mail_2"
+        android:layout_toEndOf="@id/iv_mail"
+        android:layout_marginBottom="24dp"
+        android:text="@string/default_mail_type_2"/>
+
+    <View
+        android:id="@+id/view_divider_2"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/tv_type_of_mail_2"
+        android:background="@android:color/darker_gray"/>
+
+    <TextView
+        android:id="@+id/tv_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_below="@id/view_divider_2"
+        android:text="@string/description"/>
+
+</RelativeLayout>
+
+</android.support.v4.widget.NestedScrollView>

@@ -44,10 +44,9 @@ public class DialogsRvAdapter extends RecyclerView.Adapter<DialogsRvAdapter.View
     public void onBindViewHolder(DialogsRvAdapter.ViewHolder holder, int position) {
         Dialog dialog = dialogs.get(position);
 
-        Log.i("CURRENT DIALOG", dialog.toString());
-
         holder.time.setText(dialog.getDate().toString());
         holder.message.setText(dialog.getLast_message());
+        holder.username.setText("ШтораДома");
         holder.avatar.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.home_main));
 
         if (!dialog.getLast_message_author().equals("ШтораДома")) {

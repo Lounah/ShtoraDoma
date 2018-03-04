@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 
 import com.lounah.silkapp.data.local.dialog.DialogsDao;
 import com.lounah.silkapp.data.remote.Api;
-import com.lounah.silkapp.data.repository.dialogs.DialogsRepository;
+import com.lounah.silkapp.data.repository.DialogsRepository;
 import com.lounah.silkapp.di.FragmentScoped;
 
 import javax.inject.Named;
@@ -26,7 +26,7 @@ public class DialogsModule {
     @Provides
     @FragmentScoped
     DialogsViewModelFactory provideDialogsViewModelFactory(@NonNull final DialogsRepository repository,
-                                                           @Nullable final @Named("uid") String uid) {
+                                                           @Nullable final @Named("uid") int uid) {
         return new DialogsViewModelFactory(repository, uid);
     }
 

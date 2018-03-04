@@ -26,7 +26,7 @@ public class SplashActivity extends DaggerActivity {
     @Nullable
     @Inject
     @Named("uid")
-    String userId;
+    int userId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,17 +36,10 @@ public class SplashActivity extends DaggerActivity {
 
     private void checkIfFirstLaunch() {
         Log.i("uid", userId + " ");
-        if (userId == null) {
+        if (userId == 0) {
             onStartLoginActivity();
         } else onStartMainActivity();
     }
-
-//    private void generateAndSaveUserId() {
-//        final Random random = new Random(999999999);
-//        final int id = random.nextInt();
-//        userId = String.valueOf(id);
-//        sharedPreferences.edit().putString("uid", userId).apply();
-//    }
 
     private void onStartLoginActivity() {
         Intent toLoginActivity = new Intent(this, LoginActivity.class);

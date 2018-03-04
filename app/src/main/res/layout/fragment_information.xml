@@ -40,9 +40,20 @@
         app:layout_collapseMode="pin" />
 
 </android.support.design.widget.CollapsingToolbarLayout>
+
 </android.support.design.widget.AppBarLayout>
 
+    <include layout="@layout/content_scrolling_information" />
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_call"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabSize="normal"
+        android:layout_margin="16dp"
+        app:layout_anchor="@id/information_app_bar"
+        app:layout_anchorGravity="bottom|end|right"
+        android:src="@drawable/ic_call_black_48dp"/>
 
 
 </android.support.design.widget.CoordinatorLayout>

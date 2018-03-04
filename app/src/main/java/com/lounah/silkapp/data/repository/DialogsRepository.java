@@ -1,4 +1,4 @@
-package com.lounah.silkapp.data.repository.dialogs;
+package com.lounah.silkapp.data.repository;
 
 
 import android.arch.lifecycle.LiveData;
@@ -46,22 +46,22 @@ public class DialogsRepository implements BaseRepository<Dialog> {
     }
 
     @Override
-    public Single<Dialog> get(String... args) {
+    public Single<Dialog> get(int id) {
         return null;
     }
 
     @Override
-    public Observable<List<Dialog>> getAll(String... args) {
-        return Observable.concat(getFromLocal(args[0]).toObservable(), getFromRemote(args[0]));
+    public Observable<List<Dialog>> getAll(int... id) {
+        return Observable.concat(getFromLocal(id[0]).toObservable(), getFromRemote(id[0]));
     }
 
-    private Single<List<Dialog>> getFromLocal(String... args) {
-        return dao.getByUserID(args[0])
+    private Single<List<Dialog>> getFromLocal(final int id) {
+        return dao.getByUserID(id)
                 .subscribeOn(Schedulers.io());
     }
 
-    private Observable<List<Dialog>> getFromRemote(String... args) {
-        return api.getDialogsByUserID(args[0])
+    private Observable<List<Dialog>> getFromRemote(final int id) {
+        return api.getDialogsByUserID(id)
                 .doOnNext(this::storeInDB);
     }
 

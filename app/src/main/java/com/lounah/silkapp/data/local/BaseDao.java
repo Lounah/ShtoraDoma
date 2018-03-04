@@ -11,6 +11,8 @@ import android.support.annotation.WorkerThread;
 
 import java.util.List;
 
+import io.reactivex.Completable;
+
 @Dao
 public interface BaseDao<T> {
 
