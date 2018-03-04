@@ -91,9 +91,6 @@ public class DialogsFragment extends BaseFragment {
         rvDialogs.setLayoutManager(linearLayoutManager);
     }
 
-    public static DialogsFragment newInstance() {
-        return new DialogsFragment();
-    }
 
     private void processLoadingState() {
         Toast.makeText(getContext(), "LOADING...", Toast.LENGTH_SHORT).show();

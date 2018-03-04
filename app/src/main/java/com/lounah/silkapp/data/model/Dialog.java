@@ -20,7 +20,7 @@ public class Dialog {
     @NonNull
     @PrimaryKey
     @ColumnInfo(name = "participant_id")
-    private String participant_id;
+    private int participant_id;
 
     @ColumnInfo(name = "last_message")
     private String last_message;
@@ -44,7 +44,7 @@ public class Dialog {
     @Ignore
     public Dialog() {}
 
-    public Dialog(String participant_id, String last_message, String last_message_author,
+    public Dialog(int participant_id, String last_message, String last_message_author,
                   Date date, String author_status, String last_message_status, String participant_avatar_url) {
         this.participant_id = participant_id;
         this.last_message = last_message;
@@ -56,11 +56,11 @@ public class Dialog {
     }
 
     @NonNull
-    public String getParticipant_id() {
+    public int getParticipant_id() {
         return participant_id;
     }
 
-    public void setParticipant_id(@NonNull String participant_id) {
+    public void setParticipant_id(@NonNull int participant_id) {
         this.participant_id = participant_id;
     }
 

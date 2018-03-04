@@ -10,4 +10,6 @@ public interface LoginView {
 
     void onShowError(@NonNull final Throwable error);
 
+    void onStartMainActivity();
+
 }

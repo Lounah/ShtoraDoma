@@ -39,6 +39,7 @@
             android:layout_alignStart="@id/iv_product"
             android:padding="16dp"
             android:text="Наш новый дизайн"
+            android:background="@drawable/background_product_header"
             android:textColor="@android:color/white"
             android:textSize="24sp" />
 
@@ -66,9 +67,9 @@
             android:layout_below="@id/iv_product"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
             android:background="?android:selectableItemBackground"
-            android:src="@drawable/ic_question_answer_black_24dp" />
+            android:src="@drawable/ic_question_answer_black_36dp" />
 
 
         <ImageButton
@@ -82,7 +83,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:background="?android:selectableItemBackground"
-            android:src="@drawable/ic_share_black_24dp" />
+            android:src="@drawable/ic_share_black_36dp" />
 
         <ImageButton
             android:id="@+id/ib_like"
@@ -95,7 +96,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:background="?android:selectableItemBackground"
-            android:src="@drawable/ic_favorite_black_24dp" />
+            android:src="@drawable/ic_favorite_black_36dp" />
 
     </RelativeLayout>
 

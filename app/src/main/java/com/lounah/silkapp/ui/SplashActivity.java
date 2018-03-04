@@ -23,7 +23,6 @@ public class SplashActivity extends DaggerActivity {
     @Inject
     SharedPreferences sharedPreferences;
 
-    @Nullable
     @Inject
     @Named("uid")
     int userId;

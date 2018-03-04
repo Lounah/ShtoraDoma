@@ -53,7 +53,7 @@ public class DialogsRvAdapter extends RecyclerView.Adapter<DialogsRvAdapter.View
             holder.myAvatar.setVisibility(View.VISIBLE);
             Picasso.with(context)
                     .load(Uri.parse(dialog.getParticipant_avatar_url()))
-                    .into(holder.avatar);
+                    .into(holder.myAvatar);
 
             if (!dialog.getLast_message_status().equals("read"))
                 holder.message.setBackground(ContextCompat.getDrawable(context, R.drawable.message_text_background));
@@ -62,8 +62,8 @@ public class DialogsRvAdapter extends RecyclerView.Adapter<DialogsRvAdapter.View
             if (!dialog.getLast_message_status().equals("read"))
                 holder.rlDialogs.setBackground(ContextCompat.getDrawable(context, R.drawable.rl_unread_background));
         }
-
-        if (dialog.getAuthor_status().equals("Online"))
+// todo
+//        if (dialog.getAuthor_status().equals("Online"))
             holder.status.setVisibility(View.VISIBLE);
 
 

@@ -32,7 +32,10 @@ public class LoginPresenter extends BasePresenter<LoginView> {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe(__ -> mView.onShowLoadingView())
-            .subscribe(() -> mView.onHideLoadingView(), e -> {
+            .subscribe(() -> {
+            mView.onHideLoadingView();
+            mView.onStartMainActivity();
+            }, e -> {
                 mView.onShowError(e);
                 mView.onHideLoadingView();
             });
@@ -46,6 +49,7 @@ public class LoginPresenter extends BasePresenter<LoginView> {
     @Override
     public void dropView() {
         mView = null;
+        if (userDisposable != null)
         userDisposable.dispose();
     }
 }

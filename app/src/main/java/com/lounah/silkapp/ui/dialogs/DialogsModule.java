@@ -26,7 +26,7 @@ public class DialogsModule {
     @Provides
     @FragmentScoped
     DialogsViewModelFactory provideDialogsViewModelFactory(@NonNull final DialogsRepository repository,
-                                                           @Nullable final @Named("uid") int uid) {
+                                                           @Named("uid") final int uid) {
         return new DialogsViewModelFactory(repository, uid);
     }
 

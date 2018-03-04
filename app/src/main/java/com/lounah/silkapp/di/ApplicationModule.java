@@ -17,7 +17,7 @@ import dagger.Provides;
 @Module abstract class ApplicationModule {
 
     private static final String PREFERENCE_KEY = "AppData";
-    private static final String USER_ID_KEY = "uid";
+    private static final String USER_ID_KEY = "id";
 
     @Singleton
     @Provides
@@ -31,7 +31,6 @@ import dagger.Provides;
         return sharedPreferences.edit();
     }
 
-    @Nullable
     @Singleton
     @Provides
     @Named("uid")

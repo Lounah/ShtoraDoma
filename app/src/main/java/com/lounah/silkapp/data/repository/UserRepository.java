@@ -32,7 +32,7 @@ public class UserRepository implements BaseRepository<User> {
 
     @Override
     public Completable add(User user) {
-        return Completable.concatArray(saveLocally(user), saveRemote(user));
+        return saveRemote(user);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class UserRepository implements BaseRepository<User> {
     }
 
     private Completable saveRemote(@NonNull final User user) {
-        return api.saveUser(user);
+        return api.saveUser(user).doOnComplete(() -> saveLocally(user));
     }
 
 

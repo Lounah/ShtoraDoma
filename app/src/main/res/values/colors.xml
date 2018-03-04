@@ -9,4 +9,7 @@
     <color name="defaultIncomingPressedColor">#646262</color>
     <color name="defaultOutcomePressedColor">#d6bcbc</color>
     <color name="linkColor">#536dfe</color>
+    <color name="dividerColor">#bdbdbd</color>
+    <color name="gradientStart">#39000000</color>
+    <color name="gradientEnd">#10000000</color>
 </resources>

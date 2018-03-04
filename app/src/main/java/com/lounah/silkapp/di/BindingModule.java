@@ -6,7 +6,9 @@ import com.lounah.silkapp.ui.dialogs.DialogsFragment;
 import com.lounah.silkapp.ui.dialogs.DialogsModule;
 import com.lounah.silkapp.ui.information.InformationFragment;
 import com.lounah.silkapp.ui.login.LoginActivity;
+import com.lounah.silkapp.ui.login.LoginModule;
 import com.lounah.silkapp.ui.products.ProductsFragment;
+import com.lounah.silkapp.ui.products.ProductsModule;
 import com.lounah.silkapp.ui.settings.SettingsFragment;
 
 import dagger.Module;
@@ -24,7 +26,7 @@ public abstract class BindingModule {
     abstract InformationFragment informationFragment();
 
     @FragmentScoped
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = ProductsModule.class)
     abstract ProductsFragment productsFragment();
 
     @FragmentScoped
@@ -40,7 +42,7 @@ public abstract class BindingModule {
     abstract MainActivity mainActivity();
 
     @ActivityScoped
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = LoginModule.class)
     abstract LoginActivity loginActivity();
 
 }

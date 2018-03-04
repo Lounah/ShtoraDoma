@@ -52,9 +52,6 @@ public class MainActivity extends DaggerAppCompatActivity
 
     private FragNavController fragNavController;
 
-//    @BindView(R.id.toolbar)
-//    Toolbar toolbar;
-
     @BindView(R.id.drawer_layout)
     DrawerLayout drawer;
 
