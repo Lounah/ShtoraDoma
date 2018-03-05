@@ -10,6 +10,7 @@ import com.lounah.silkapp.data.remote.Api;
 import com.lounah.silkapp.data.repository.DialogsRepository;
 import com.lounah.silkapp.data.repository.ProductsRepository;
 import com.lounah.silkapp.di.FragmentScoped;
+import com.lounah.silkapp.ui.ItemClickListener;
 import com.lounah.silkapp.ui.dialogs.DialogsRvAdapter;
 import com.lounah.silkapp.ui.dialogs.DialogsViewModelFactory;
 
@@ -20,6 +21,12 @@ import dagger.Provides;
 
 @Module
 public class ProductsModule {
+
+    @Provides
+    @FragmentScoped
+    ItemClickListener provideItemListener(ProductsFragment fragment) {
+        return fragment::onItemClicked;
+    }
 
     @Provides
     @FragmentScoped
@@ -36,8 +43,8 @@ public class ProductsModule {
 
     @Provides
     @FragmentScoped
-    ProductsRvAdapter provideAdapter(@NonNull final Context context) {
-        return new ProductsRvAdapter(context);
+    ProductsRvAdapter provideAdapter(@NonNull final Context context, @NonNull final ItemClickListener listener) {
+        return new ProductsRvAdapter(context, listener);
     }
 
 }

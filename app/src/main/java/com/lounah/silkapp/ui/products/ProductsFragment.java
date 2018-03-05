@@ -19,11 +19,13 @@ import com.lounah.silkapp.data.model.Dialog;
 import com.lounah.silkapp.data.model.Product;
 import com.lounah.silkapp.data.model.Response;
 import com.lounah.silkapp.ui.BaseFragment;
+import com.lounah.silkapp.ui.ItemClickListener;
 import com.lounah.silkapp.ui.MainActivity;
 import com.lounah.silkapp.ui.dialogs.DialogsFragment;
 import com.lounah.silkapp.ui.dialogs.DialogsRvAdapter;
 import com.lounah.silkapp.ui.dialogs.DialogsViewModel;
 import com.lounah.silkapp.ui.dialogs.DialogsViewModelFactory;
+import com.lounah.silkapp.ui.products.comments.CommentsFragment;
 
 import java.util.List;
 
@@ -46,6 +48,7 @@ public class ProductsFragment extends BaseFragment {
     @BindView(R.id.rv_products)
     RecyclerView rvProducts;
 
+    private ItemClickListener itemListener;
 
     private LinearLayoutManager linearLayoutManager;
 
@@ -107,6 +110,14 @@ public class ProductsFragment extends BaseFragment {
     private void processSuccessState(@NonNull final Response<List<Product>> products) {
         Toast.makeText(getContext(), "SUCCESS" + products.getData().size(), Toast.LENGTH_SHORT).show();
         adapter.updateDataSet(products.getData());
+    }
+
+    public void onItemClicked(final int id) {
+        CommentsFragment fragment = new CommentsFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("id", id);
+        fragment.setArguments(bundle);
+        mFragmentNavigator.pushFragment(fragment, true);
     }
 
 }

@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.lounah.silkapp.R;
 import com.lounah.silkapp.data.model.Dialog;
 import com.lounah.silkapp.data.model.Product;
+import com.lounah.silkapp.ui.ItemClickListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class ProductsRvAdapter extends RecyclerView.Adapter<ProductsRvAdapter.ViewHolder> {
 
@@ -30,8 +32,15 @@ public class ProductsRvAdapter extends RecyclerView.Adapter<ProductsRvAdapter.Vi
 
     private final Context context;
 
-    public ProductsRvAdapter(@NonNull final Context context) {
+    private final ItemClickListener listener;
+    @Override
+    public long getItemId(int position) {
+      return products.get(position).getId();
+    }
+
+    public ProductsRvAdapter(@NonNull final Context context, ItemClickListener listener) {
         this.context = context;
+        this.listener = listener;
     }
 
     @Override
@@ -76,6 +85,12 @@ public class ProductsRvAdapter extends RecyclerView.Adapter<ProductsRvAdapter.Vi
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+        }
+
+
+        @OnClick(R.id.ib_comments)
+        public void onCommentsBtnClicked() {
+            listener.onItemClicked(itemView.getId());
         }
 
     }

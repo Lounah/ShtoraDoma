@@ -4,6 +4,7 @@ package com.lounah.silkapp.data.remote;
 import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
+import com.lounah.silkapp.data.model.Comment;
 import com.lounah.silkapp.data.model.Dialog;
 import com.lounah.silkapp.data.model.Product;
 import com.lounah.silkapp.data.model.Response;
@@ -23,4 +24,6 @@ public interface Api {
     Completable saveUser(@NonNull final User user);
 
     Single<List<Product>> getProducts(final int uid);
+
+    Observable<List<Comment>> getComments(final int id);
 }

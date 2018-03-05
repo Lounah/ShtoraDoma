@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_comments"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_above="@id/comment_input"/>
+
+    <com.stfalcon.chatkit.messages.MessageInput
+        android:id="@+id/comment_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:inputHint="@string/default_hint_comment"
+        app:inputButtonIcon="@drawable/ic_send_black_24dp"
+        app:inputMaxLines="3"
+        app:inputTextColor="@color/black"
+        app:inputTextSize="18sp"
+        app:showAttachmentButton="true"/>
 
 
 

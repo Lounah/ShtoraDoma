@@ -9,6 +9,8 @@ import com.lounah.silkapp.ui.login.LoginActivity;
 import com.lounah.silkapp.ui.login.LoginModule;
 import com.lounah.silkapp.ui.products.ProductsFragment;
 import com.lounah.silkapp.ui.products.ProductsModule;
+import com.lounah.silkapp.ui.products.comments.CommentsFragment;
+import com.lounah.silkapp.ui.products.comments.CommentsModule;
 import com.lounah.silkapp.ui.settings.SettingsFragment;
 
 import dagger.Module;
@@ -28,6 +30,10 @@ public abstract class BindingModule {
     @FragmentScoped
     @ContributesAndroidInjector(modules = ProductsModule.class)
     abstract ProductsFragment productsFragment();
+
+    @FragmentScoped
+    @ContributesAndroidInjector(modules = CommentsModule.class)
+    abstract CommentsFragment commentsFragment();
 
     @FragmentScoped
     @ContributesAndroidInjector
