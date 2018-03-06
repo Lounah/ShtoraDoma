@@ -12,4 +12,5 @@
     <color name="dividerColor">#bdbdbd</color>
     <color name="gradientStart">#39000000</color>
     <color name="gradientEnd">#10000000</color>
+    <color name="settingsBackgroundColor">#cfcfcf</color>
 </resources>

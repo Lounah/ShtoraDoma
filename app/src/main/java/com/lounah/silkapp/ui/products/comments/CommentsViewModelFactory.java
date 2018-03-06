@@ -17,7 +17,7 @@ public class CommentsViewModelFactory implements ViewModelProvider.Factory {
     private final int id;
 
     @Inject
-    public CommentsViewModelFactory(@NonNull final CommentsRepository repository, final int id) {
+    public CommentsViewModelFactory(@NonNull final CommentsRepository repository, @Named("productId") final int id) {
         this.repository = repository;
         this.id = id;
     }

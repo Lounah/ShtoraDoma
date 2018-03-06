@@ -26,8 +26,8 @@ public class CommentsModule {
     @Provides
     @FragmentScoped
     @Named("productId")
-    String provideId(@NonNull final CommentsFragment fragment) {
-        return fragment.getArguments().getString("id");
+    int provideId(@NonNull final CommentsFragment fragment) {
+        return fragment.getArguments().getInt("id");
     }
 
 
