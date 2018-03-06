@@ -14,6 +14,6 @@ import io.reactivex.Single;
 @Dao
 public interface CommentsDao extends BaseDao<Comment> {
 
-    @Query("SELECT * FROM comments WHERE id=:id")
+    @Query("SELECT * FROM comments WHERE product_id=:id")
     Single<List<Comment>> getComments(final int id);
 }

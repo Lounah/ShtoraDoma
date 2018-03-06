@@ -101,6 +101,27 @@ public class FirebaseApi implements Api {
 
     @Override
     public Observable<List<Comment>> getComments(int id) {
-        return null;
+        return Observable.create(source -> {
+
+            Query query = db.collection(COLLECTION_COMMENTS)
+                    .whereEqualTo("product_id", id);
+
+            query.addSnapshotListener((documentSnapshots, e) -> {
+
+               final List<Comment> comments = new ArrayList<>();
+
+                if (e != null) {
+                    source.onError(new Throwable());
+                }
+
+                if (documentSnapshots != null) {
+                    for (DocumentSnapshot snapshot : documentSnapshots) {
+                        comments.add(snapshot.toObject(Comment.class));
+                    }
+                    source.onNext(comments);
+                }
+            });
+
+        });
     }
 }

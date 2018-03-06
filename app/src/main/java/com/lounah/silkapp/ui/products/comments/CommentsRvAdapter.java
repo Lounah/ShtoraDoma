@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lounah.silkapp.R;
+import com.lounah.silkapp.data.model.Comment;
 import com.lounah.silkapp.data.model.Product;
 import com.lounah.silkapp.ui.ItemClickListener;
 import com.lounah.silkapp.ui.products.ProductsRvAdapter;
@@ -26,13 +27,13 @@ import butterknife.OnClick;
 
 public class CommentsRvAdapter extends RecyclerView.Adapter<CommentsRvAdapter.ViewHolder> {
 
-    private List<Product> products = new ArrayList<>();
+    private List<Comment> comments = new ArrayList<>();
 
     private final Context context;
 
     @Override
     public long getItemId(int position) {
-        return products.get(position).getId();
+        return comments.get(position).getId();
     }
 
     public CommentsRvAdapter(@NonNull final Context context) {
@@ -63,11 +64,11 @@ public class CommentsRvAdapter extends RecyclerView.Adapter<CommentsRvAdapter.Vi
 
     @Override
     public int getItemCount() {
-        return products.size();
+        return comments.size();
     }
 
-    public void updateDataSet(@NonNull final List<Product> products) {
-        this.products = products;
+    public void updateDataSet(@NonNull final List<Comment> comments) {
+        this.comments = comments;
         notifyDataSetChanged();
     }
 
