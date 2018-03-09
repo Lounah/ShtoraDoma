@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.lounah.silkapp.R;
 import com.lounah.silkapp.data.model.Dialog;
+import com.lounah.silkapp.ui.ItemClickListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class DialogsRvAdapter extends RecyclerView.Adapter<DialogsRvAdapter.ViewHolder> {
 
@@ -30,8 +32,11 @@ public class DialogsRvAdapter extends RecyclerView.Adapter<DialogsRvAdapter.View
 
     private final Context context;
 
-    public DialogsRvAdapter(@NonNull final Context context) {
+    private final ItemClickListener clickListener;
+
+    public DialogsRvAdapter(@NonNull final Context context, @NonNull final ItemClickListener clickListener) {
         this.context = context;
+        this.clickListener = clickListener;
     }
 
     @Override
@@ -95,6 +100,12 @@ public class DialogsRvAdapter extends RecyclerView.Adapter<DialogsRvAdapter.View
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+        }
+
+        @OnClick(R.id.rl_dialogs)
+        public void onCommentsBtnClicked() {
+            clickListener.onItemClicked(getAdapterPosition());
+            Log.i("ADAPTER ID", itemView.getId() + "  ");
         }
 
     }

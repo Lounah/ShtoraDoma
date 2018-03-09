@@ -116,6 +116,7 @@ public class ProductsFragment extends BaseFragment {
         CommentsFragment fragment = new CommentsFragment();
         Bundle bundle = new Bundle();
         bundle.putInt("id", id);
+        Log.i("FRAGMENT ID", id + " ");
         fragment.setArguments(bundle);
         mFragmentNavigator.pushFragment(fragment, true);
     }

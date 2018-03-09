@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 
 import com.lounah.silkapp.data.model.Comment;
 import com.lounah.silkapp.data.model.Dialog;
+import com.lounah.silkapp.data.model.Message;
 import com.lounah.silkapp.data.model.Product;
 import com.lounah.silkapp.data.model.Response;
 import com.lounah.silkapp.data.model.User;
@@ -26,4 +27,8 @@ public interface Api {
     Single<List<Product>> getProducts(final int uid);
 
     Observable<List<Comment>> getComments(final int id);
+
+    Observable<List<Message>> getMessagesById(final int id);
+
+    Completable sendMessage(@NonNull final Message message);
 }

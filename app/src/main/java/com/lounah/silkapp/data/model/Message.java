@@ -14,11 +14,15 @@ import com.stfalcon.chatkit.commons.models.IUser;
 
 import java.util.Date;
 
-@Entity
+@Entity(tableName = "messages")
 public class Message {
 
-    @NonNull
     @PrimaryKey
+    private final int id;
+
+    private final int dialog_id;
+
+    @NonNull
     private final int from_id;
 
     private final int to_id;
@@ -30,15 +34,23 @@ public class Message {
 
     private final String status;
 
-    public Message(int from_id, int to_id, String text, Date date, String status) {
+    public Message(int id, int dialog_id, int from_id, int to_id, String text, Date date, String status) {
         this.from_id = from_id;
         this.to_id = to_id;
         this.text = text;
         this.date = date;
         this.status = status;
+        this.id = id;
+        this.dialog_id = dialog_id;
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public int getDialog_id() {
+        return dialog_id;
+    }
 
     public int getFrom_id() {
         return from_id;

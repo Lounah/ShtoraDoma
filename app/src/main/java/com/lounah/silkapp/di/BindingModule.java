@@ -2,6 +2,8 @@ package com.lounah.silkapp.di;
 
 import com.lounah.silkapp.ui.MainActivity;
 import com.lounah.silkapp.ui.SplashActivity;
+import com.lounah.silkapp.ui.conversation.ConversationFragment;
+import com.lounah.silkapp.ui.conversation.ConversationModule;
 import com.lounah.silkapp.ui.dialogs.DialogsFragment;
 import com.lounah.silkapp.ui.dialogs.DialogsModule;
 import com.lounah.silkapp.ui.information.InformationFragment;
@@ -22,6 +24,10 @@ public abstract class BindingModule {
     @FragmentScoped
     @ContributesAndroidInjector(modules = DialogsModule.class)
     abstract DialogsFragment dialogsFragment();
+
+    @FragmentScoped
+    @ContributesAndroidInjector(modules = ConversationModule.class)
+    abstract ConversationFragment conversationFragment();
 
     @FragmentScoped
     @ContributesAndroidInjector

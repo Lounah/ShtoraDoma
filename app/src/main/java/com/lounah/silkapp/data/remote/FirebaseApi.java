@@ -13,6 +13,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.lounah.silkapp.data.model.Comment;
 import com.lounah.silkapp.data.model.Dialog;
+import com.lounah.silkapp.data.model.Message;
 import com.lounah.silkapp.data.model.Product;
 import com.lounah.silkapp.data.model.User;
 
@@ -103,6 +104,8 @@ public class FirebaseApi implements Api {
     public Observable<List<Comment>> getComments(int id) {
         return Observable.create(source -> {
 
+            Log.i("ID = ", id + " ");
+
             Query query = db.collection(COLLECTION_COMMENTS)
                     .whereEqualTo("product_id", id);
 
@@ -123,5 +126,15 @@ public class FirebaseApi implements Api {
             });
 
         });
+    }
+
+    @Override
+    public Observable<List<Message>> getMessagesById(int id) {
+        return null;
+    }
+
+    @Override
+    public Completable sendMessage(@NonNull Message message) {
+        return null;
     }
 }

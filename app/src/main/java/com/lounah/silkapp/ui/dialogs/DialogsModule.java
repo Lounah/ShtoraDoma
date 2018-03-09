@@ -8,6 +8,8 @@ import com.lounah.silkapp.data.local.dialog.DialogsDao;
 import com.lounah.silkapp.data.remote.Api;
 import com.lounah.silkapp.data.repository.DialogsRepository;
 import com.lounah.silkapp.di.FragmentScoped;
+import com.lounah.silkapp.ui.ItemClickListener;
+import com.lounah.silkapp.ui.products.ProductsFragment;
 
 import javax.inject.Named;
 
@@ -16,6 +18,12 @@ import dagger.Provides;
 
 @Module
 public class DialogsModule {
+
+    @Provides
+    @FragmentScoped
+    ItemClickListener provideItemListener(DialogsFragment fragment) {
+        return fragment::onItemClicked;
+    }
 
     @Provides
     @FragmentScoped
@@ -32,8 +40,8 @@ public class DialogsModule {
 
     @Provides
     @FragmentScoped
-    DialogsRvAdapter provideAdapter(@NonNull final Context context) {
-        return new DialogsRvAdapter(context);
+    DialogsRvAdapter provideAdapter(@NonNull final Context context, @NonNull final ItemClickListener clickListener) {
+        return new DialogsRvAdapter(context, clickListener);
     }
 
 }

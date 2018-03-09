@@ -19,6 +19,8 @@ import com.lounah.silkapp.data.model.Dialog;
 import com.lounah.silkapp.data.model.Response;
 import com.lounah.silkapp.ui.BaseFragment;
 import com.lounah.silkapp.ui.MainActivity;
+import com.lounah.silkapp.ui.conversation.ConversationFragment;
+import com.lounah.silkapp.ui.products.comments.CommentsFragment;
 
 
 import java.util.List;
@@ -104,6 +106,14 @@ public class DialogsFragment extends BaseFragment {
     private void processSuccessState(@NonNull final Response<List<Dialog>> dialogs) {
         Toast.makeText(getContext(), "SUCCESS" + dialogs.getData().size(), Toast.LENGTH_SHORT).show();
         adapter.updateDataSet(dialogs.getData());
+    }
+
+    public void onItemClicked(final int id) {
+        ConversationFragment fragment = new ConversationFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("id", id);
+        fragment.setArguments(bundle);
+        mFragmentNavigator.pushFragment(fragment, true);
     }
 
 }

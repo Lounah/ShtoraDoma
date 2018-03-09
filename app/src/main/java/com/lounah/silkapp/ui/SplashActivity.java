@@ -21,9 +21,6 @@ import dagger.android.DaggerActivity;
 public class SplashActivity extends DaggerActivity {
 
     @Inject
-    SharedPreferences sharedPreferences;
-
-    @Inject
     @Named("uid")
     int userId;
 

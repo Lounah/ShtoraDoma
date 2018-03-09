@@ -3,6 +3,7 @@ package com.lounah.silkapp.ui.products.comments;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,18 +43,32 @@ public class CommentsRvAdapter extends RecyclerView.Adapter<CommentsRvAdapter.Vi
 
     @Override
     public CommentsRvAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_comment, parent, false);
         return new CommentsRvAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(CommentsRvAdapter.ViewHolder holder, int position) {
+        final Comment comment = comments.get(position);
 
+        holder.text.setText(comment.getText());
+
+        holder.username.setText(comment.getAuthor_username());
 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+
+        @Nullable
+        @BindView(R.id.iv_comment_avatar)
+        ImageView avatar;
+
+        @BindView(R.id.tv_comment_text)
+        TextView text;
+
+        @BindView(R.id.tv_comment_username)
+        TextView username;
 
         public ViewHolder(View itemView) {
             super(itemView);

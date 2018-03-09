@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,8 @@ import com.lounah.silkapp.R;
 import com.lounah.silkapp.data.model.Dialog;
 import com.lounah.silkapp.data.model.Product;
 import com.lounah.silkapp.ui.ItemClickListener;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -33,9 +36,15 @@ public class ProductsRvAdapter extends RecyclerView.Adapter<ProductsRvAdapter.Vi
     private final Context context;
 
     private final ItemClickListener listener;
+
     @Override
     public long getItemId(int position) {
       return products.get(position).getId();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return products.get(position).getId();
     }
 
     public ProductsRvAdapter(@NonNull final Context context, ItemClickListener listener) {
@@ -53,7 +62,24 @@ public class ProductsRvAdapter extends RecyclerView.Adapter<ProductsRvAdapter.Vi
     public void onBindViewHolder(ProductsRvAdapter.ViewHolder holder, int position) {
         Product product = products.get(position);
 
-        Picasso.with(context).load(product.getImage_header_url()).placeholder(R.drawable.placeholder).into(holder.ivHeader);
+        Picasso.with(context)
+                .load(product.getImage_header_url())
+                .networkPolicy(NetworkPolicy.OFFLINE)
+                .placeholder(R.drawable.placeholder)
+                .into(holder.ivHeader, new Callback() {
+                    @Override
+                    public void onSuccess() {
+
+                    }
+
+                    @Override
+                    public void onError() {
+                        Picasso.with(context)
+                                .load(product.getImage_header_url())
+                                .placeholder(R.drawable.placeholder)
+                                .into(holder.ivHeader);
+                    }
+                });
 
         holder.comments.setText(String.valueOf(product.getComments_quantity()));
 
@@ -90,7 +116,8 @@ public class ProductsRvAdapter extends RecyclerView.Adapter<ProductsRvAdapter.Vi
 
         @OnClick(R.id.ib_comments)
         public void onCommentsBtnClicked() {
-            listener.onItemClicked(itemView.getId());
+            listener.onItemClicked(getAdapterPosition());
+            Log.i("ADAPTER ID", itemView.getId() + "  ");
         }
 
     }

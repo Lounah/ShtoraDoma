@@ -93,6 +93,9 @@ public class CommentsFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        rvComments.setAdapter(adapter);
+        linearLayoutManager = new LinearLayoutManager(getContext());
+        rvComments.setLayoutManager(linearLayoutManager);
     }
 
     private void processLoadingState() {
