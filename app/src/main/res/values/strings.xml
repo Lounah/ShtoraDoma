@@ -25,6 +25,12 @@
     <string name="default_hint_message">Введите сообщение...</string>
     <string name="default_hint_comment">Оставьте комментарий...</string>
 
+    <string name="settings_username">Пользователь</string>
+    <string name="developers">Разработчики</string>
+    <string name="confidentiality_policy">Политика конфиденциальности</string>
+    <string name="notifications">Уведомления</string>
+    <string name="about_application">О приложении</string>
+
     <string name="description">Через час отсюда в чистый переулок \n
 вытечет по человеку ваш обрюзгший жир, \n
 а я вам открыл столько стихов шкатулок, \n

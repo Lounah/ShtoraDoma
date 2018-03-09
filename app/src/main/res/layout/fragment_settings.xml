@@ -23,6 +23,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_scrolling_settings"></include>
+    <include layout="@layout/content_scrolling_settings"/>
 
 </android.support.design.widget.CoordinatorLayout>
