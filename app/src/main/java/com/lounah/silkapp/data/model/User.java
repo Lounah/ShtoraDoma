@@ -19,6 +19,8 @@ public class User {
     @Ignore
     public User() {}
 
+
+
     public User(int id, String username, String avatar_link, String status) {
         this.id = id;
         this.username = username;

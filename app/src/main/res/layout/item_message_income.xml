@@ -20,6 +20,7 @@
         android:linksClickable="true"
         android:maxWidth="220dp"
         android:padding="8dp"
+        android:textSize="20sp"
         android:text="hi man, how are you?hi man, how are you?hi man, how are you?hi man, how are you?hi man, how are you?hi man, how are you?"
         android:textColor="#ffffff"
         android:textColorLink="@color/linkColor" />
@@ -35,6 +36,6 @@
         android:paddingBottom="2dp"
         android:textColor="@android:color/black"
         android:text="23:51"
-        android:textSize="8sp" />
+        android:textSize="13sp" />
 
 </RelativeLayout>

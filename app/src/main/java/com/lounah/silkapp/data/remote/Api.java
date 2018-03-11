@@ -28,7 +28,7 @@ public interface Api {
 
     Observable<List<Comment>> getComments(final int id);
 
-    Observable<List<Message>> getMessagesById(final int id);
+    Observable<List<Message>> getMessagesByDialogId(final String id);
 
     Completable sendMessage(@NonNull final Message message);
 }

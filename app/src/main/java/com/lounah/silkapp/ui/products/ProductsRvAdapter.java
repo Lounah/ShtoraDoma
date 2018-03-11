@@ -116,7 +116,7 @@ public class ProductsRvAdapter extends RecyclerView.Adapter<ProductsRvAdapter.Vi
 
         @OnClick(R.id.ib_comments)
         public void onCommentsBtnClicked() {
-            listener.onItemClicked(getAdapterPosition());
+            listener.onItemClicked(products.get(getAdapterPosition()).getId());
             Log.i("ADAPTER ID", itemView.getId() + "  ");
         }
 

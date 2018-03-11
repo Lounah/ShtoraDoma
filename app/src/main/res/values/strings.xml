@@ -21,6 +21,7 @@
     <string name="default_mail_type_1">Рабочий</string>
     <string name="default_mail_2">moonvishnya@gmail.com</string>
     <string name="default_mail_type_2">Личный</string>
+    <string name="default_location">Краснодар, п. Знаменский, ул. Сосновая 97/1</string>
 
     <string name="default_hint_message">Введите сообщение...</string>
     <string name="default_hint_comment">Оставьте комментарий...</string>

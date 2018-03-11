@@ -20,6 +20,7 @@ import com.lounah.silkapp.data.model.Comment;
 import com.lounah.silkapp.data.model.Product;
 import com.lounah.silkapp.data.model.Response;
 import com.lounah.silkapp.ui.BaseFragment;
+import com.lounah.silkapp.ui.MainActivity;
 import com.lounah.silkapp.ui.products.ProductsRvAdapter;
 import com.lounah.silkapp.ui.products.ProductsViewModel;
 import com.lounah.silkapp.ui.products.ProductsViewModelFactory;
@@ -86,6 +87,10 @@ public class CommentsFragment extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_comments, container, false);
         ButterKnife.bind(this, view);
+        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_black_24dp));
+        toolbar.setNavigationOnClickListener(v -> {
+            getActivity().onBackPressed();
+        });
         return view;
     }
 

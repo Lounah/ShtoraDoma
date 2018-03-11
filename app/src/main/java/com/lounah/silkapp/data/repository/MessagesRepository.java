@@ -43,16 +43,20 @@ public class MessagesRepository implements BaseRepository<Message> {
 
     @Override
     public Observable<List<Message>> getAll(int... id) {
+        return null;
+    }
+
+    public Observable<List<Message>> getAll(String... id) {
         return Observable.concat(getFromLocal(id[0]).toObservable(), getFromRemote(id[0]));
     }
 
-    private Single<List<Message>> getFromLocal(final int id) {
+    private Single<List<Message>> getFromLocal(final String id) {
         return dao.getMessagesById(id)
                 .subscribeOn(Schedulers.io());
     }
 
-    private Observable<List<Message>> getFromRemote(final int id) {
-        return api.getMessagesById(id)
+    private Observable<List<Message>> getFromRemote(final String id) {
+        return api.getMessagesByDialogId(id)
                 .doOnNext(this::storeInDB);
     }
 

@@ -21,7 +21,7 @@ public class DialogsModule {
 
     @Provides
     @FragmentScoped
-    ItemClickListener provideItemListener(DialogsFragment fragment) {
+    ClickListener provideItemListener(DialogsFragment fragment) {
         return fragment::onItemClicked;
     }
 
@@ -40,7 +40,7 @@ public class DialogsModule {
 
     @Provides
     @FragmentScoped
-    DialogsRvAdapter provideAdapter(@NonNull final Context context, @NonNull final ItemClickListener clickListener) {
+    DialogsRvAdapter provideAdapter(@NonNull final Context context, @NonNull final ClickListener clickListener) {
         return new DialogsRvAdapter(context, clickListener);
     }
 

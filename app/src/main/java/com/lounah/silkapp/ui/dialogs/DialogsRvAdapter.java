@@ -19,8 +19,11 @@ import com.lounah.silkapp.data.model.Dialog;
 import com.lounah.silkapp.ui.ItemClickListener;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,9 +35,9 @@ public class DialogsRvAdapter extends RecyclerView.Adapter<DialogsRvAdapter.View
 
     private final Context context;
 
-    private final ItemClickListener clickListener;
+    private final ClickListener clickListener;
 
-    public DialogsRvAdapter(@NonNull final Context context, @NonNull final ItemClickListener clickListener) {
+    public DialogsRvAdapter(@NonNull final Context context, @NonNull final ClickListener clickListener) {
         this.context = context;
         this.clickListener = clickListener;
     }
@@ -49,27 +52,32 @@ public class DialogsRvAdapter extends RecyclerView.Adapter<DialogsRvAdapter.View
     public void onBindViewHolder(DialogsRvAdapter.ViewHolder holder, int position) {
         Dialog dialog = dialogs.get(position);
 
-        holder.time.setText(dialog.getDate().toString());
-        holder.message.setText(dialog.getLast_message());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yy/ hh:mm");
+        sdf.setTimeZone(TimeZone.getTimeZone("GMT+3"));
+        String date = sdf.format(dialog.getLastMessageTime());
+
+        holder.time.setText(date);
+        holder.message.setText(dialog.getLastMessageText());
         holder.username.setText("ШтораДома");
         holder.avatar.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.home_main));
 
-        if (!dialog.getLast_message_author().equals("ШтораДома")) {
+
+        if (dialog.getHostStatus().equals("Online"))
+            holder.status.setVisibility(View.VISIBLE);
+
+        if (dialog.getLastMessageAuthor().equals("ШтораДома")) {
+            holder.myAvatar.setVisibility(View.GONE);
+            if (dialog.getLastMessageStatus().equals("Unread"))
+                holder.rlDialogs.setBackground(ContextCompat.getDrawable(context, R.drawable.rl_unread_background));
+        } else {
             holder.myAvatar.setVisibility(View.VISIBLE);
             Picasso.with(context)
-                    .load(Uri.parse(dialog.getParticipant_avatar_url()))
+                    .load(Uri.parse(dialog.getParticipantAvatarUrl()))
                     .into(holder.myAvatar);
-
-            if (!dialog.getLast_message_status().equals("read"))
+            if (dialog.getLastMessageStatus().equals("Unread"))
                 holder.message.setBackground(ContextCompat.getDrawable(context, R.drawable.message_text_background));
 
-        } else {
-            if (!dialog.getLast_message_status().equals("read"))
-                holder.rlDialogs.setBackground(ContextCompat.getDrawable(context, R.drawable.rl_unread_background));
         }
-// todo
-//        if (dialog.getAuthor_status().equals("Online"))
-            holder.status.setVisibility(View.VISIBLE);
 
 
     }
@@ -104,7 +112,7 @@ public class DialogsRvAdapter extends RecyclerView.Adapter<DialogsRvAdapter.View
 
         @OnClick(R.id.rl_dialogs)
         public void onCommentsBtnClicked() {
-            clickListener.onItemClicked(getAdapterPosition());
+            clickListener.onClick(dialogs.get(getAdapterPosition()).getDialogId());
             Log.i("ADAPTER ID", itemView.getId() + "  ");
         }
 

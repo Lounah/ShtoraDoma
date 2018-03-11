@@ -15,17 +15,17 @@ import javax.inject.Named;
 public class ConversationViewModelFactory implements ViewModelProvider.Factory {
 
     private final MessagesRepository repository;
-    private final int uid;
+    private final String id;
 
     @Inject
-    public ConversationViewModelFactory(@NonNull final MessagesRepository repository, @Named("dialogId") final int uid) {
+    public ConversationViewModelFactory(@NonNull final MessagesRepository repository, @Named("dialogId") final String id) {
         this.repository = repository;
-        this.uid = uid;
+        this.id = id;
     }
 
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        return (T) new ConversationViewModel(repository, uid);
+        return (T) new ConversationViewModel(repository, id);
     }
 }

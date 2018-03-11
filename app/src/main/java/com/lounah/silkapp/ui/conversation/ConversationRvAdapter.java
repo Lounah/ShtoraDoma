@@ -3,6 +3,7 @@ package com.lounah.silkapp.ui.conversation;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
+import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +14,10 @@ import android.widget.TextView;
 import com.lounah.silkapp.R;
 import com.lounah.silkapp.data.model.Message;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimeZone;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -60,15 +63,18 @@ public class ConversationRvAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         final Message message = messages.get(position);
+        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
+        sdf.setTimeZone(TimeZone.getTimeZone("GMT+3"));
+        String date = sdf.format(message.getDate());
 
         switch (holder.getItemViewType()) {
             case MESSAGE_RECEIVED_VIEW_TYPE:
                 ((ReceivedMessageViewHolder) holder).text.setText(message.getText());
-                ((ReceivedMessageViewHolder) holder).date.setText(message.getDate().toString());
+                ((ReceivedMessageViewHolder) holder).date.setText(date);
                 break;
             case MESSAGE_SENT_VIEW_TYPE:
                 ((SentMessageViewHolder) holder).text.setText(message.getText());
-                ((SentMessageViewHolder) holder).date.setText(message.getDate().toString());
+                ((SentMessageViewHolder) holder).date.setText(date);
 
                 if (message.getStatus().equals("read")) {
                     ((SentMessageViewHolder) holder).status.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_done_all_black_18dp));
@@ -125,9 +131,17 @@ public class ConversationRvAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     }
 
     public void updateDataSet(@NonNull final List<Message> messages) {
-        this.messages = messages;
-        notifyDataSetChanged();
+        final DiffUtilCallback diffCallback = new DiffUtilCallback(messages, this.messages);
+        final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
+
+        this.messages.clear();
+        this.messages.addAll(messages);
+        diffResult.dispatchUpdatesTo(this);
     }
 
+    public void addMessage(@NonNull final Message message) {
+        messages.add(message);
+        notifyItemInserted(messages.size() - 1);
+    }
 
 }

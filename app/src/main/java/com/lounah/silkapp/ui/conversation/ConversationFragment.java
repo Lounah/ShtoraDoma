@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,9 +28,11 @@ import com.stfalcon.chatkit.commons.ImageLoader;
 import com.stfalcon.chatkit.messages.MessageInput;
 import com.stfalcon.chatkit.messages.MessagesList;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,14 +43,27 @@ public class ConversationFragment extends BaseFragment {
     MessageInput messageInput;
 
     @BindView(R.id.rv_messages)
-    MessagesList rvMessages;
+    RecyclerView rvMessages;
 
+    @BindView(R.id.conversation_toolbar)
+    Toolbar toolbar;
 
     @Inject
     ConversationViewModelFactory factory;
 
     @Inject
     ConversationRvAdapter adapter;
+
+    @Inject
+    @NonNull
+    @Named("dialogId")
+    String dialogId;
+
+    @Inject
+    @Named("uid")
+    int uid;
+
+    private ConversationViewModel viewModel;
 
 
     private LinearLayoutManager linearLayoutManager;
@@ -60,7 +76,7 @@ public class ConversationFragment extends BaseFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ConversationViewModel viewModel = ViewModelProviders.of(this, factory).get(ConversationViewModel.class);
+        viewModel = ViewModelProviders.of(this, factory).get(ConversationViewModel.class);
         viewModel.getMessages().observe(this, response -> {
             switch (response.getStatus()) {
                 case ERROR:
@@ -76,14 +92,34 @@ public class ConversationFragment extends BaseFragment {
                     break;
             }
         });
+
+        viewModel.getInput().observe(this, response -> {
+            switch (response.getStatus()) {
+                case ERROR:
+
+                    break;
+
+                case LOADING:
+
+                    break;
+
+                case SUCCESS:
+                 //   adapter.addMessage(response.getData());
+                    break;
+            }
+        });
+
+
+
     }
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_settings, container, false);
+        View view = inflater.inflate(R.layout.fragment_conversation, container, false);
         ButterKnife.bind(this, view);
+        initUI();
         return view;
     }
 
@@ -109,5 +145,27 @@ public class ConversationFragment extends BaseFragment {
         Toast.makeText(getContext(), "SUCCESS" + messages.getData().size(), Toast.LENGTH_SHORT).show();
         adapter.updateDataSet(messages.getData());
     }
+
+    private void initUI() {
+        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_black_24dp));
+        toolbar.setNavigationOnClickListener(v -> {
+            getActivity().onBackPressed();
+        });
+//        toolbar.setLogo(getResources().getDrawable(R.drawable.home_main));
+
+        messageInput.setInputListener(input -> {
+            final Message message = new Message();
+            message.setText(input.toString());
+            message.setDialogId(dialogId);
+            message.setFrom_id(uid);
+            message.setDate(Calendar.getInstance().getTime());
+            message.setStatus("Unread");
+            message.setTo_id(1);
+            viewModel.postMessage(message);
+            return true;
+        });
+
+    }
+
 
 }

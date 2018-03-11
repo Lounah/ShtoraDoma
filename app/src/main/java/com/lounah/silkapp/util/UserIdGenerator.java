@@ -4,8 +4,8 @@ import java.util.Random;
 
 public final class UserIdGenerator {
 
-    private static final int LIMIT_ID = 999999999;
-    private static final Random random = new Random(LIMIT_ID);
+    private static final int LIMIT = 999999999;
+    private static final Random random = new Random(LIMIT);
 
     private UserIdGenerator() {}
 

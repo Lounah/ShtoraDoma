@@ -108,10 +108,11 @@ public class DialogsFragment extends BaseFragment {
         adapter.updateDataSet(dialogs.getData());
     }
 
-    public void onItemClicked(final int id) {
+    public void onItemClicked(final String id) {
         ConversationFragment fragment = new ConversationFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt("id", id);
+        bundle.putString("id", id);
+        Log.i("ID FROM DIALOGS", id + " ");
         fragment.setArguments(bundle);
         mFragmentNavigator.pushFragment(fragment, true);
     }

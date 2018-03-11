@@ -80,7 +80,7 @@
             android:background="@color/white"
             android:layout_below="@id/email_tv"/>
 
-        <Switch
+        <android.support.v7.widget.SwitchCompat
             android:id="@+id/notifications_switcher"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

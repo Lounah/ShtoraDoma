@@ -17,105 +17,200 @@ import java.util.Objects;
 @Entity(tableName = "dialogs")
 public class Dialog {
 
+//    @NonNull
+//    @PrimaryKey
+//    @ColumnInfo(name = "participant_id")
+//    private int participant_id;
+//
+//    @ColumnInfo(name = "last_message")
+//    private String last_message;
+//
+//    @ColumnInfo(name = "last_message_author")
+//    private String last_message_author;
+//
+//    @ColumnInfo(name = "author_status")
+//    private String author_status;
+//
+//    @ColumnInfo(name = "last_message_status")
+//    private String last_message_status;
+//
+//    @ColumnInfo(name = "participant_avatar_url")
+//    private String participant_avatar_url;
+//
+//    @TypeConverters(TimeStampConverter.class)
+//    @ColumnInfo(name = "date")
+//    private Date date;
+//
+//    @Ignore
+//    public Dialog() {}
+//
+//    public Dialog(int participant_id, String last_message, String last_message_author,
+//                  Date date, String author_status, String last_message_status, String participant_avatar_url) {
+//        this.participant_id = participant_id;
+//        this.last_message = last_message;
+//        this.last_message_author = last_message_author;
+//        this.author_status = author_status;
+//        this.last_message_status = last_message_status;
+//        this.participant_avatar_url = participant_avatar_url;
+//        this.date = date;
+//    }
+//
+//    @NonNull
+//    public int getParticipant_id() {
+//        return participant_id;
+//    }
+//
+//    public void setParticipant_id(@NonNull int participant_id) {
+//        this.participant_id = participant_id;
+//    }
+//
+//    public String getLast_message() {
+//        return last_message;
+//    }
+//
+//    public void setLast_message(String last_message) {
+//        this.last_message = last_message;
+//    }
+//
+//    public String getLast_message_author() {
+//        return last_message_author;
+//    }
+//
+//    public void setLast_message_author(String last_message_author) {
+//        this.last_message_author = last_message_author;
+//    }
+//
+//    public Date getDate() {
+//        return date;
+//    }
+//
+//    public void setDate(Date date) {
+//        this.date = date;
+//    }
+//
+//    public String getAuthor_status() {
+//        return author_status;
+//    }
+//
+//    public void setAuthor_status(String author_status) {
+//        this.author_status = author_status;
+//    }
+//
+//    public String getLast_message_status() {
+//        return last_message_status;
+//    }
+//
+//    public void setLast_message_status(String last_message_status) {
+//        this.last_message_status = last_message_status;
+//    }
+//
+//    public String getParticipant_avatar_url() {
+//        return participant_avatar_url;
+//    }
+//
+//    public void setParticipant_avatar_url(String participant_avatar_url) {
+//        this.participant_avatar_url = participant_avatar_url;
+//    }
+//
+//    @Override
+//    public String toString() {
+//        return participant_id + " " + last_message + " " + last_message_author + " "
+//                + last_message_status + " " + participant_avatar_url + " " + date +
+//                " " + author_status;
+//    }
+
+    private String hostStatus;
+    private String participantAvatarUrl;
+    private String lastMessageText;
+    private String lastMessageStatus;
+    private String lastMessageAuthor;
+    private int participantId;
+    private String dialogId;
+
     @NonNull
     @PrimaryKey
-    @ColumnInfo(name = "participant_id")
-    private int participant_id;
-
-    @ColumnInfo(name = "last_message")
-    private String last_message;
-
-    @ColumnInfo(name = "last_message_author")
-    private String last_message_author;
-
-    @ColumnInfo(name = "author_status")
-    private String author_status;
-
-    @ColumnInfo(name = "last_message_status")
-    private String last_message_status;
-
-    @ColumnInfo(name = "participant_avatar_url")
-    private String participant_avatar_url;
-
     @TypeConverters(TimeStampConverter.class)
-    @ColumnInfo(name = "date")
-    private Date date;
+    private Date lastMessageTime;
 
     @Ignore
-    public Dialog() {}
+    public Dialog() {
 
-    public Dialog(int participant_id, String last_message, String last_message_author,
-                  Date date, String author_status, String last_message_status, String participant_avatar_url) {
-        this.participant_id = participant_id;
-        this.last_message = last_message;
-        this.last_message_author = last_message_author;
-        this.author_status = author_status;
-        this.last_message_status = last_message_status;
-        this.participant_avatar_url = participant_avatar_url;
-        this.date = date;
     }
 
-    @NonNull
-    public int getParticipant_id() {
-        return participant_id;
+    public Dialog(String hostStatus, String participantAvatarUrl, String lastMessageText,
+                  String lastMessageStatus, String lastMessageAuthor, @NonNull  Date lastMessageTime
+                    , int participantId, String dialogId) {
+        this.hostStatus = hostStatus;
+        this.participantAvatarUrl = participantAvatarUrl;
+        this.lastMessageText = lastMessageText;
+        this.lastMessageStatus = lastMessageStatus;
+        this.lastMessageAuthor = lastMessageAuthor;
+        this.lastMessageTime = lastMessageTime;
+        this.participantId = participantId;
+        this.dialogId = dialogId;
     }
 
-    public void setParticipant_id(@NonNull int participant_id) {
-        this.participant_id = participant_id;
+    public String getHostStatus() {
+        return hostStatus;
     }
 
-    public String getLast_message() {
-        return last_message;
+    public void setHostStatus(String hostStatus) {
+        this.hostStatus = hostStatus;
     }
 
-    public void setLast_message(String last_message) {
-        this.last_message = last_message;
+    public String getParticipantAvatarUrl() {
+        return participantAvatarUrl;
     }
 
-    public String getLast_message_author() {
-        return last_message_author;
+    public void setParticipantAvatarUrl(String participantAvatarUrl) {
+        this.participantAvatarUrl = participantAvatarUrl;
     }
 
-    public void setLast_message_author(String last_message_author) {
-        this.last_message_author = last_message_author;
+    public String getLastMessageText() {
+        return lastMessageText;
     }
 
-    public Date getDate() {
-        return date;
+    public void setLastMessageText(String lastMessageText) {
+        this.lastMessageText = lastMessageText;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public String getLastMessageStatus() {
+        return lastMessageStatus;
     }
 
-    public String getAuthor_status() {
-        return author_status;
+    public void setLastMessageStatus(String lastMessageStatus) {
+        this.lastMessageStatus = lastMessageStatus;
     }
 
-    public void setAuthor_status(String author_status) {
-        this.author_status = author_status;
+    public String getLastMessageAuthor() {
+        return lastMessageAuthor;
     }
 
-    public String getLast_message_status() {
-        return last_message_status;
+    public void setLastMessageAuthor(String lastMessageAuthor) {
+        this.lastMessageAuthor = lastMessageAuthor;
     }
 
-    public void setLast_message_status(String last_message_status) {
-        this.last_message_status = last_message_status;
+    public Date getLastMessageTime() {
+        return lastMessageTime;
     }
 
-    public String getParticipant_avatar_url() {
-        return participant_avatar_url;
+    public void setLastMessageTime(@NonNull Date lastMessageTime) {
+        this.lastMessageTime = lastMessageTime;
     }
 
-    public void setParticipant_avatar_url(String participant_avatar_url) {
-        this.participant_avatar_url = participant_avatar_url;
+    public int getParticipantId() {
+        return participantId;
     }
 
-    @Override
-    public String toString() {
-        return participant_id + " " + last_message + " " + last_message_author + " "
-                + last_message_status + " " + participant_avatar_url + " " + date +
-                " " + author_status;
+    public void setParticipantId(int participantId) {
+        this.participantId = participantId;
+    }
+
+    public String getDialogId() {
+        return dialogId;
+    }
+
+    public void setDialogId(String dialogId) {
+        this.dialogId = dialogId;
     }
 }

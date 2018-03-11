@@ -16,6 +16,6 @@ import io.reactivex.Single;
 @Dao
 public interface MessagesDao extends BaseDao<Message> {
 
-    @Query("SELECT * FROM messages WHERE dialog_id=:id")
-    Single<List<Message>> getMessagesById(final int id);
+    @Query("SELECT * FROM messages where dialogId=:id")
+    Single<List<Message>> getMessagesById(final String id);
 }

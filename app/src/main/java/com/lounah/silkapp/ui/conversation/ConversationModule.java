@@ -25,8 +25,8 @@ public class ConversationModule {
     @Provides
     @FragmentScoped
     @Named("dialogId")
-    int provideId(@NonNull final ConversationFragment fragment) {
-        return fragment.getArguments().getInt("id");
+    String provideId(@NonNull final ConversationFragment fragment) {
+        return fragment.getArguments().getString("id");
     }
 
 
@@ -39,7 +39,7 @@ public class ConversationModule {
     @Provides
     @FragmentScoped
     ConversationViewModelFactory provideConversationViewModelFactory(@NonNull final MessagesRepository repository,
-                                                             @Named("dialogId") final int id) {
+                                                             @Named("dialogId") final String id) {
         return new ConversationViewModelFactory(repository, id);
     }
 
